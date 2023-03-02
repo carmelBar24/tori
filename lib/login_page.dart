@@ -15,46 +15,74 @@ class LoginPage extends StatelessWidget {
           Container(
             color: const Color(0xfff4f5f3),
           ),
-          Container(),
-          Align(
-            alignment: Alignment(0.005, 0.417),
-            child: SizedBox(
-              width: 237.0,
-              height: 51.0,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xff418fe7),
-                      borderRadius: BorderRadius.circular(16.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0x29000000),
-                          offset: Offset(5, 5),
-                          blurRadius: 5,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(start: 33.0, end: 32.0),
-                    Pin(size: 34.0, end: 6.0),
-                    child: Text(
-                      'כניסה',
-                      style: TextStyle(
-                        fontFamily: 'Noto Sans Hebrew',
-                        fontSize: 25,
-                        color: const Color(0xffffffff),
-                        fontWeight: FontWeight.w700,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
+          Pinned.fromPins(
+            Pin(start: 32.0, end: 32.0),
+            Pin(size: 324.0, middle: 0.4551),
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xd9ffffff),
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x23000000),
+                    offset: Offset(3, 3),
+                    blurRadius: 3,
                   ),
                 ],
               ),
             ),
           ),
-          Container(),
+          Pinned.fromPins(
+            Pin(start: 96.0, end: 95.0),
+            Pin(size: 51.0, middle: 0.7086),
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xff418fe7),
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(5, 5),
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment(0.008, 0.415),
+            child: SizedBox(
+              width: 172.0,
+              height: 34.0,
+              child: Text(
+                'כניסה',
+                style: TextStyle(
+                  fontFamily: 'Noto Sans Hebrew',
+                  fontSize: 25,
+                  color: const Color(0xffffffff),
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(start: 15.0, end: 14.0),
+            Pin(size: 59.0, middle: 0.173),
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xff9dcbff),
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(5, 5),
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+            ),
+          ),
           Pinned.fromPins(
             Pin(size: 300.0, start: 53.0),
             Pin(size: 41.0, middle: 0.1797),
@@ -140,42 +168,42 @@ class LoginPage extends StatelessWidget {
           ),
           Pinned.fromPins(
             Pin(size: 21.0, end: 7.0),
+            Pin(size: 1.0, start: 16.0),
+            child: SvgPicture.string(
+              _svg_cfnhkk,
+              allowDrawingOutsideViewBox: true,
+              fit: BoxFit.fill,
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(size: 10.5, end: 7.0),
             Pin(size: 21.0, start: 5.5),
-            child: Transform.rotate(
-              angle: 3.1416,
-              child:
-                  // Adobe XD layer: 'Icon feather-arrow-…' (group)
-                  Stack(
-                children: <Widget>[
-                  Pinned.fromPins(
-                    Pin(start: 0.0, end: 0.0),
-                    Pin(size: 1.0, middle: 0.525),
-                    child: SvgPicture.string(
-                      _svg_pkssu,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(size: 10.5, start: 0.0),
-                    Pin(start: 0.0, end: 0.0),
-                    child: SvgPicture.string(
-                      _svg_sy3th,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ],
-              ),
+            child: SvgPicture.string(
+              _svg_ol6sbx,
+              allowDrawingOutsideViewBox: true,
+              fit: BoxFit.fill,
             ),
           ),
           Pinned.fromPins(
             Pin(start: 23.0, end: 23.0),
             Pin(size: 52.0, end: 10.0),
-            child: Stack(
-              children: <Widget>[
-                Container(),
-              ],
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment(1.036, -5.162),
+                  end: Alignment(-1.255, 7.254),
+                  colors: [const Color(0xff9dcbff), const Color(0xff3e8adf)],
+                  stops: [0.0, 1.0],
+                ),
+                borderRadius: BorderRadius.circular(30.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(5, 5),
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
             ),
           ),
           Pinned.fromPins(
@@ -10976,10 +11004,10 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-const String _svg_pkssu =
-    '<svg viewBox="7.5 18.0 21.0 1.0" ><path  d="M 28.5 18 L 7.5 18" fill="none" stroke="#434242" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>';
-const String _svg_sy3th =
-    '<svg viewBox="7.5 7.5 10.5 21.0" ><path  d="M 18 28.5 L 7.5 18 L 18 7.5" fill="none" stroke="#434242" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>';
+const String _svg_cfnhkk =
+    '<svg viewBox="400.0 16.0 21.0 1.0" ><path transform="matrix(-1.0, 0.0, 0.0, -1.0, 428.5, 34.01)" d="M 28.5 18 L 7.5 18" fill="none" stroke="#434242" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>';
+const String _svg_ol6sbx =
+    '<svg viewBox="410.5 5.5 10.5 21.0" ><path transform="matrix(-1.0, 0.0, 0.0, -1.0, 428.5, 34.01)" d="M 18 28.5 L 7.5 18 L 18 7.5" fill="none" stroke="#434242" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>';
 const String _svg_add5pm =
     '<svg viewBox="0.0 0.0 32.5 40.0" ><path transform="translate(0.0, 0.0)" d="M 6.963858604431152 2.500000238418579 C 6.963858604431152 1.119531393051147 8.00118350982666 0 9.285146713256836 0 C 10.56910800933838 0 11.60643291473389 1.119531393051147 11.60643291473389 2.500000238418579 L 11.60643291473389 5.000000476837158 L 20.89157867431641 5.000000476837158 L 20.89157867431641 2.500000238418579 C 20.89157867431641 1.119531393051147 21.92890357971191 0 23.21286582946777 0 C 24.49682807922363 0 25.53414916992188 1.119531393051147 25.53414916992188 2.500000238418579 L 25.53414916992188 5.000000476837158 L 29.01608276367188 5.000000476837158 C 30.93839836120605 5.000000476837158 32.49801254272461 6.678906440734863 32.49801254272461 8.750000953674316 L 32.49801254272461 12.50000190734863 L -1.723017248878023e-07 12.50000190734863 L -1.723017248878023e-07 8.750000953674316 C -1.723017248878023e-07 6.678906440734863 1.558889031410217 5.000000476837158 3.481929302215576 5.000000476837158 L 6.963858604431152 5.000000476837158 L 6.963858604431152 2.500000238418579 Z M 32.49801254272461 36.25000381469727 C 32.49801254272461 38.32031631469727 30.93839836120605 40.00000381469727 29.01608276367188 40.00000381469727 L 3.481929302215576 40.00000381469727 C 1.558889031410217 40.00000381469727 -1.723017248878023e-07 38.32031631469727 -1.723017248878023e-07 36.25000381469727 L -1.723017248878023e-07 15.00000190734863 L 32.49801254272461 15.00000190734863 L 32.49801254272461 36.25000381469727 Z" fill="none" stroke="#f4f5f3" stroke-width="2" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 const String _svg_yum =

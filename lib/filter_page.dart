@@ -72,140 +72,143 @@ class FilterPage extends StatelessWidget {
           ),
           Pinned.fromPins(
             Pin(size: 21.0, end: 7.0),
+            Pin(size: 1.0, start: 16.0),
+            child: SvgPicture.string(
+              _svg_cfnhkk,
+              allowDrawingOutsideViewBox: true,
+              fit: BoxFit.fill,
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(size: 10.5, end: 7.0),
             Pin(size: 21.0, start: 5.5),
-            child: Transform.rotate(
-              angle: 3.1416,
-              child:
-                  // Adobe XD layer: 'Icon feather-arrow-…' (group)
-                  Stack(
-                children: <Widget>[
-                  Pinned.fromPins(
-                    Pin(start: 0.0, end: 0.0),
-                    Pin(size: 1.0, middle: 0.525),
-                    child: SvgPicture.string(
-                      _svg_pkssu,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  Pinned.fromPins(
-                    Pin(size: 10.5, start: 0.0),
-                    Pin(start: 0.0, end: 0.0),
-                    child: SvgPicture.string(
-                      _svg_sy3th,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
+            child: SvgPicture.string(
+              _svg_ol6sbx,
+              allowDrawingOutsideViewBox: true,
+              fit: BoxFit.fill,
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(start: 15.0, end: 14.0),
+            Pin(size: 59.0, middle: 0.173),
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xff9dcbff),
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(5, 5),
+                    blurRadius: 5,
                   ),
                 ],
               ),
             ),
           ),
           Pinned.fromPins(
-            Pin(start: 15.0, end: 14.0),
-            Pin(size: 59.0, middle: 0.173),
-            child: Stack(
-              children: <Widget>[
-                Container(),
-                Pinned.fromPins(
-                  Pin(start: 5.0, end: 6.0),
-                  Pin(size: 41.0, middle: 0.5),
-                  child: Text(
-                    'אישור כניסה למאגר החלפות',
-                    style: TextStyle(
-                      fontFamily: 'Noto Sans Hebrew',
-                      fontSize: 30,
-                      color: const Color(0xffffffff),
-                      fontWeight: FontWeight.w700,
-                      shadows: [
-                        Shadow(
-                          color: const Color(0x29000000),
-                          offset: Offset(5, 3),
-                          blurRadius: 6,
-                        )
-                      ],
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
+            Pin(start: 20.0, end: 20.0),
+            Pin(size: 41.0, middle: 0.1797),
+            child: Text(
+              'אישור כניסה למאגר החלפות',
+              style: TextStyle(
+                fontFamily: 'Noto Sans Hebrew',
+                fontSize: 30,
+                color: const Color(0xffffffff),
+                fontWeight: FontWeight.w700,
+                shadows: [
+                  Shadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(5, 3),
+                    blurRadius: 6,
+                  )
+                ],
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
           Pinned.fromPins(
-            Pin(size: 66.0, start: 6.0),
-            Pin(size: 22.0, start: 5.0),
-            child: Stack(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: SizedBox(
-                    width: 18.0,
-                    height: 18.0,
-                    child:
-                        // Adobe XD layer: 'Icon material-person' (shape)
-                        SvgPicture.string(
-                      _svg_wi3v76,
-                      allowDrawingOutsideViewBox: true,
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: SizedBox(
-                    width: 48.0,
-                    height: 17.0,
-                    child: Text(
-                      'גל כהן',
-                      style: TextStyle(
-                        fontFamily: 'Noto Sans Hebrew',
-                        fontSize: 12,
-                        color: const Color(0xff434242),
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ],
+            Pin(size: 18.0, start: 6.0),
+            Pin(size: 18.0, start: 5.0),
+            child:
+                // Adobe XD layer: 'Icon material-person' (shape)
+                SvgPicture.string(
+              _svg_wi3v76,
+              allowDrawingOutsideViewBox: true,
+              fit: BoxFit.fill,
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(size: 48.0, start: 24.0),
+            Pin(size: 17.0, start: 10.0),
+            child: Text(
+              'גל כהן',
+              style: TextStyle(
+                fontFamily: 'Noto Sans Hebrew',
+                fontSize: 12,
+                color: const Color(0xff434242),
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
           Pinned.fromPins(
             Pin(start: 15.0, end: 14.0),
             Pin(size: 59.0, middle: 0.173),
-            child: Stack(
-              children: <Widget>[
-                Container(),
-                Pinned.fromPins(
-                  Pin(start: 5.0, end: 6.0),
-                  Pin(size: 41.0, middle: 0.5),
-                  child: Text(
-                    'סינון מתקדם',
-                    style: TextStyle(
-                      fontFamily: 'Noto Sans Hebrew',
-                      fontSize: 30,
-                      color: const Color(0xffffffff),
-                      fontWeight: FontWeight.w700,
-                      shadows: [
-                        Shadow(
-                          color: const Color(0x29000000),
-                          offset: Offset(5, 3),
-                          blurRadius: 6,
-                        )
-                      ],
-                    ),
-                    textAlign: TextAlign.center,
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color(0xff9dcbff),
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(5, 5),
+                    blurRadius: 5,
                   ),
-                ),
-              ],
+                ],
+              ),
+            ),
+          ),
+          Pinned.fromPins(
+            Pin(start: 20.0, end: 20.0),
+            Pin(size: 41.0, middle: 0.1797),
+            child: Text(
+              'סינון מתקדם',
+              style: TextStyle(
+                fontFamily: 'Noto Sans Hebrew',
+                fontSize: 30,
+                color: const Color(0xffffffff),
+                fontWeight: FontWeight.w700,
+                shadows: [
+                  Shadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(5, 3),
+                    blurRadius: 6,
+                  )
+                ],
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
           Pinned.fromPins(
             Pin(start: 23.0, end: 23.0),
             Pin(size: 52.0, end: 10.0),
-            child: Stack(
-              children: <Widget>[
-                Container(),
-              ],
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment(1.036, -5.162),
+                  end: Alignment(-1.255, 7.254),
+                  colors: [const Color(0xff9dcbff), const Color(0xff3e8adf)],
+                  stops: [0.0, 1.0],
+                ),
+                borderRadius: BorderRadius.circular(30.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(5, 5),
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
             ),
           ),
           Pinned.fromPins(
@@ -11077,12 +11080,12 @@ const String _svg_rikdty =
     '<svg viewBox="1364.0 -1366.0 576.0 448.0" ><path transform="translate(1364.0, -1398.0)" d="M 528 32 L 48 32 C 21.48999977111816 32 0 53.4900016784668 0 80 L 0 96 L 576 96 L 576 80 C 576 53.4900016784668 554.5 32 528 32 Z M 0 432 C 0 458.5 21.48999977111816 480 48 480 L 528 480 C 554.510009765625 480 576 458.510009765625 576 432 L 576 128 L 0 128 L 0 432 Z M 368 192 L 496 192 C 504.7999877929688 192 512 199.1999969482422 512 208 C 512 216.8000030517578 504.7999877929688 224 496 224 L 368 224 C 359.2000122070312 224 352 216.8000030517578 352 208 C 352 199.1999969482422 359.2000122070312 192 368 192 Z M 368 256 L 496 256 C 504.7999877929688 256 512 263.2000122070312 512 272 C 512 280.7999877929688 504.7999877929688 288 496 288 L 368 288 C 359.2000122070312 288 352 280.7999877929688 352 272 C 352 263.2000122070312 359.2000122070312 256 368 256 Z M 368 320 L 496 320 C 504.8359985351562 320 512 327.1640014648438 512 336 C 512 344.8359985351562 504.7999877929688 352 496 352 L 368 352 C 359.1640014648438 352 352 344.8359985351562 352 336 C 352 327.1640014648438 359.2000122070312 320 368 320 Z M 176 192 C 211.3500061035156 192 240 220.6600036621094 240 256 C 240 291.3399963378906 211.3500061035156 320 176 320 C 140.6499938964844 320 112 291.3399963378906 112 256 C 112 220.6600036621094 140.6999969482422 192 176 192 Z M 112 352 L 240 352 C 266.510009765625 352 288 373.489990234375 288 400 C 288 408.8359985351562 280.8359985351562 416 272 416 L 80 416 C 71.16000366210938 416 64 408.7999877929688 64 400 C 64 373.5 85.48999786376953 352 112 352 Z" fill="#000000" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 const String _svg_wh1co =
     '<svg viewBox="1950.0 -1366.0 576.0 448.0" ><path transform="translate(1950.0, -1398.0)" d="M 64 32 L 96 32 L 96 480 L 64 480 C 28.65000152587891 480 0 451.3399963378906 0 416 L 0 96 C 0 60.65999984741211 28.64999961853027 32 64 32 Z M 128 32 L 448 32 L 448 480 L 128 480 L 128 32 Z M 176 282 C 176 290.8349914550781 183.1640014648438 298 192 298 L 245.1000061035156 298 L 245.1000061035156 352 C 245.1000061035156 360.8359985351562 252.2649993896484 368 261.1000061035156 368 L 313.1000061035156 368 C 321.9360046386719 368 329.1000061035156 360.8359985351562 329.1000061035156 352 L 329.1000061035156 298 L 384 298 C 392.8359985351562 298 400 290.8349914550781 400 282 L 400 230 C 400 221.1629943847656 392.8359985351562 214 384 214 L 330 214 L 330 160 C 330 151.1640014648438 322.8359985351562 144 314 144 L 262 144 C 253.1649932861328 144 246 151.1640014648438 246 160 L 246 214 L 192 214 C 183.1640014648438 214 176 221.1629943847656 176 230 L 176 282 Z M 512 32 L 480 32 L 480 480 L 512 480 C 547.3499755859375 480 576 451.3399963378906 576 416 L 576 96 C 576 60.65999984741211 547.2999877929688 32 512 32 Z" fill="#000000" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
-const String _svg_pkssu =
-    '<svg viewBox="7.5 18.0 21.0 1.0" ><path  d="M 28.5 18 L 7.5 18" fill="none" stroke="#434242" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>';
-const String _svg_sy3th =
-    '<svg viewBox="7.5 7.5 10.5 21.0" ><path  d="M 18 28.5 L 7.5 18 L 18 7.5" fill="none" stroke="#434242" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>';
 const String _svg_keerfk =
     '<svg viewBox="2536.0 -1366.0 448.0 512.0" ><path transform="translate(2536.0, -1366.0)" d="M 352 128 C 352 198.6999969482422 294.7000122070312 256 224 256 C 153.3000030517578 256 96 198.6999969482422 96 128 C 96 57.31000137329102 153.3000030517578 0 224 0 C 294.7000122070312 0 352 57.31000137329102 352 128 Z M 209.1000061035156 359.2000122070312 L 176 304 L 272 304 L 238.8999938964844 359.2000122070312 L 272.2000122070312 483.1000061035156 L 311.7000122070312 321.8999938964844 C 388.8999938964844 333.8999938964844 448 400.7000122070312 448 481.2999877929688 C 448 498.2000122070312 434.2000122070312 512 417.2999877929688 512 L 30.71999931335449 512 C 13.75 512 0 498.2000122070312 0 481.2999877929688 C 0 400.7000122070312 59.09000015258789 333.8999938964844 136.3000030517578 321.8999938964844 L 175.8000030517578 483.1000061035156 L 209.1000061035156 359.2000122070312 Z" fill="#000000" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
+const String _svg_cfnhkk =
+    '<svg viewBox="400.0 16.0 21.0 1.0" ><path transform="matrix(-1.0, 0.0, 0.0, -1.0, 428.5, 34.01)" d="M 28.5 18 L 7.5 18" fill="none" stroke="#434242" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>';
+const String _svg_ol6sbx =
+    '<svg viewBox="410.5 5.5 10.5 21.0" ><path transform="matrix(-1.0, 0.0, 0.0, -1.0, 428.5, 34.01)" d="M 18 28.5 L 7.5 18 L 18 7.5" fill="none" stroke="#434242" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>';
 const String _svg_wi3v76 =
     '<svg viewBox="6.0 5.0 18.0 18.0" ><path transform="translate(0.0, -1.0)" d="M 15 15 C 17.48624992370605 15 19.5 12.98624992370605 19.5 10.5 C 19.5 8.013750076293945 17.48624992370605 6 15 6 C 12.51375007629395 6 10.5 8.013750076293945 10.5 10.5 C 10.5 12.98624992370605 12.51375007629395 15 15 15 Z M 15 17.25 C 11.99625015258789 17.25 6 18.75749969482422 6 21.75 L 6 24 L 24 24 L 24 21.75 C 24 18.75749969482422 18.00374984741211 17.25 15 17.25 Z" fill="#434242" stroke="#434242" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 const String _svg_add5pm =
