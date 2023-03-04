@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "699211692758",
+    "firebase_url": "https://tori-88644-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tori-88644",
+    "storage_bucket": "tori-88644.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699211692758:android:9e386656e1fa494391a777",
+        "android_client_info": {
+          "package_name": "com.example.tori"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "699211692758-pl83kti7hllhrsiuav3unaijv39btrta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAirAWR5YYh_7NeR1Nt3d6b8pcNXsBiR4o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "699211692758-pl83kti7hllhrsiuav3unaijv39btrta.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "699211692758-vpu8ucub95mjm9k0144k7feof8itt8t8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tori"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
