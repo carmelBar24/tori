@@ -6,6 +6,12 @@ IconData calendar_today = IconData(0xe122, fontFamily: 'MaterialIcons');
 const String _svg_qcrh9k =
     '<svg viewBox="324.9 381.6 47.1 53.8" ><path transform="translate(324.9, 381.58)" d="M 37.0103645324707 13.45831394195557 C 37.0103645324707 20.89192962646484 30.98566818237305 26.91662788391113 23.45742225646973 26.91662788391113 C 16.11843490600586 26.91662788391113 9.999106407165527 20.89192962646484 9.999106407165527 13.45831394195557 C 9.999106407165527 6.025749683380127 16.11843490600586 -3.188759478689462e-07 23.45742225646973 -3.188759478689462e-07 C 30.98566818237305 -3.188759478689462e-07 37.0103645324707 6.025749683380127 37.0103645324707 13.45831394195557 Z M 30.18657875061035 38.06179809570312 C 27.37925910949707 38.80831146240234 25.13971138000488 41.44740676879883 25.13971138000488 44.58066558837891 L 25.13971138000488 47.10410690307617 C 25.13971138000488 47.54570388793945 25.4130802154541 47.97679138183594 25.72851181030273 48.29221343994141 L 27.41080284118652 49.97451019287109 C 28.06268882751465 50.63690948486328 29.1351490020752 50.63690948486328 29.78703308105469 49.97451019287109 C 30.44943809509277 49.32262420654297 30.44943809509277 48.25016021728516 29.78703308105469 47.59827423095703 L 28.5042896270752 46.41015625 L 28.5042896270752 44.58066558837891 C 28.5042896270752 42.71963500976562 30.10246276855469 41.21609115600586 31.86886978149414 41.21609115600586 C 33.82452774047852 41.21609115600586 35.32807922363281 42.71963500976562 35.32807922363281 44.58066558837891 L 35.32807922363281 46.41015625 L 34.13996124267578 47.59827423095703 C 33.47755813598633 48.25016021728516 33.47755813598633 49.32262420654297 34.13996124267578 49.97451019287109 C 34.79184722900391 50.63690948486328 35.86430358886719 50.63690948486328 36.51619338989258 49.97451019287109 L 38.19848251342773 48.29221343994141 C 38.51390838623047 47.97679138183594 38.69265747070312 47.54570388793945 38.69265747070312 47.10410690307617 L 38.69265747070312 44.58066558837891 C 38.69265747070312 41.44740676879883 36.54773330688477 38.80831146240234 33.64579010009766 38.06179809570312 L 33.64579010009766 32.46818542480469 C 41.37380599975586 34.35024261474609 47.10410690307617 41.22660446166992 47.10410690307617 49.62754058837891 L 47.10410690307617 50.46868515014648 C 47.10410690307617 52.32971572875977 45.60055923461914 53.83325576782227 43.73952484130859 53.83325576782227 L 3.364578485488892 53.83325576782227 C 1.506700277328491 53.83325576782227 -7.971898696723656e-08 52.32971572875977 -7.971898696723656e-08 50.46868515014648 L -7.971898696723656e-08 49.62754058837891 C -7.971898696723656e-08 41.32123184204102 5.733451843261719 34.35024261474609 13.45831394195557 32.46818542480469 L 13.45831394195557 38.93448257446289 C 11.02950954437256 39.65996932983398 9.252591133117676 41.91003036499023 9.252591133117676 44.58066558837891 C 9.252591133117676 47.82959365844727 11.89168262481689 50.46868515014648 15.14060306549072 50.46868515014648 C 18.38952445983887 50.46868515014648 21.02861785888672 47.82959365844727 21.02861785888672 44.58066558837891 C 21.02861785888672 41.91003036499023 19.2516975402832 39.65996932983398 16.82289505004883 38.93448257446289 L 16.82289505004883 31.98452758789062 C 17.10677909851074 31.9740104675293 17.38015556335449 31.96349906921387 17.66403961181641 31.96349906921387 L 29.44006538391113 31.96349906921387 C 29.72395324707031 31.96349906921387 29.99731826782227 31.9740104675293 30.28120613098145 31.98452758789062 L 30.18657875061035 38.06179809570312 Z M 17.56941032409668 44.58066558837891 C 17.56941032409668 45.97907257080078 16.53900909423828 47.10410690307617 15.04597568511963 47.10410690307617 C 13.74220085144043 47.10410690307617 12.52254009246826 45.97907257080078 12.52254009246826 44.58066558837891 C 12.52254009246826 43.18226623535156 13.74220085144043 42.05723571777344 15.04597568511963 42.05723571777344 C 16.53900909423828 42.05723571777344 17.56941032409668 43.18226623535156 17.56941032409668 44.58066558837891 Z" fill="#434242" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 
+const String _svg_aji50p =
+    '<svg viewBox="61.0 473.1 316.0 1.0" ><path transform="translate(61.0, 473.11)" d="M 0 0 L 316 0" fill="none" stroke="#707070" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
+
+const String _svg_kx5wvb =
+    '<svg viewBox="53.5 258.0 320.0 74.0" ><path transform="translate(53.5, 258.0)" d="M 8 0 L 312 0 C 316.4182739257812 0 320 3.581721782684326 320 8 L 320 66 C 320 70.41828155517578 316.4182739257812 74 312 74 L 8 74 C 3.581721782684326 74 0 70.41828155517578 0 66 L 0 8 C 0 3.581721782684326 3.581721782684326 0 8 0 Z" fill="#ffffff" fill-opacity="0.85" stroke="none" stroke-width="1" stroke-opacity="0.85" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
+
 class ReceivedRequestsPageNew extends StatelessWidget {
   const ReceivedRequestsPageNew({
     Key? key,
@@ -18,9 +24,6 @@ class ReceivedRequestsPageNew extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(
-              height: 10.0,
-            ),
             Expanded(
                 child: Container(
                     height: 180.0,
@@ -65,12 +68,12 @@ class ReceivedRequestsPageNew extends StatelessWidget {
               "התור הנבחר להחלפה",
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            Text("תורים עתידיים 3",
-                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold)),
+            Doctor("אלון ווייסגור", "רופא", "שוהם"),
+            ButtonList(),
             Expanded(
               flex: 2,
               child: Container(
-                margin: EdgeInsets.only(top: 10.0),
+                margin: EdgeInsets.only(top: 20.0),
                 color: Colors.white,
                 child: Scrollbar(
                   thickness: 10,
@@ -89,7 +92,7 @@ class ReceivedRequestsPageNew extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 120.0,
+              height: 30.0,
             ),
             Flexible(
               child: Container(
@@ -143,12 +146,169 @@ class ReceivedRequestsPageNew extends StatelessWidget {
   }
 }
 
+const String _svg_wfqzrk =
+    '<svg viewBox="357.0 287.6 13.0 14.9" ><path transform="matrix(0.0, 1.0, -1.0, 0.0, 370.0, 287.57)" d="M 7.430877685546875 0 L 14.86175537109375 13.00403594970703 L 0 13.00403594970703 L 7.430877685546875 0 Z" fill="#6e6f6f" stroke="#707070" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
+const String _svg_ju4z8i =
+    '<svg viewBox="57.0 287.9 13.0 14.9" ><path transform="matrix(0.0, -1.0, 1.0, 0.0, 57.0, 302.75)" d="M 7.430877685546875 0 L 14.86175537109375 13.00403594970703 L 0 13.00403594970703 L 7.430877685546875 0 Z" fill="#6e6f6f" stroke="#707070" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
+
+class ButtonList extends StatefulWidget {
+  const ButtonList({Key? key}) : super(key: key);
+
+  @override
+  _ButtonListState createState() => _ButtonListState();
+}
+
+class _ButtonListState extends State<ButtonList> {
+  int _selectedIndex = 0;
+
+  List<String> _buttonTitles = [
+    'בקשות שהתקבלו',
+    'בקשות שנשלחו',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: _buttonTitles.map((title) {
+        int index = _buttonTitles.indexOf(title);
+        return ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          style: ElevatedButton.styleFrom(
+            primary: _selectedIndex == index ? Colors.blue : Colors.grey,
+          ),
+          child: Text(title),
+        );
+      }).toList(),
+    );
+  }
+}
+
+class DoctorList extends StatefulWidget {
+  const DoctorList({Key? key}) : super(key: key);
+
+  @override
+  _DoctorListState createState() => _DoctorListState();
+}
+
+class _DoctorListState extends State<DoctorList> {
+  final PageController _pageController = PageController(initialPage: 0);
+  int _currentIndex = 0;
+
+  List<Widget> _widgets = [
+    Doctor("אלון", "ווייסגור", "רופא"),
+    Doctor("אלון", "ווייסגור", "מלך"),
+    Doctor("אלון", "ווייסגור", "תותח על"),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: PageView(
+            controller: _pageController,
+            children: _widgets,
+            onPageChanged: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: _widgets.asMap().entries.map((entry) {
+            int index = entry.key;
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  _pageController.jumpToPage(index);
+                  _currentIndex = index;
+                });
+              },
+              child: Container(
+                width: 10.0,
+                height: 10.0,
+                margin: EdgeInsets.symmetric(horizontal: 4.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: _currentIndex == index ? Colors.blue : Colors.grey,
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+}
+
+class Doctor extends StatelessWidget {
+  final String name;
+  final String profession;
+  final String location;
+
+  const Doctor(this.name, this.profession, this.location);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        child: Row(
+      textDirection: TextDirection.rtl,
+      children: [
+        IconButton(
+          icon: SvgPicture.string(
+            _svg_wfqzrk,
+            allowDrawingOutsideViewBox: true,
+            fit: BoxFit.fill,
+          ),
+          onPressed: () {},
+        ),
+        SvgPicture.string(
+          _svg_qcrh9k,
+          allowDrawingOutsideViewBox: true,
+          fit: BoxFit.fill,
+        ),
+        Spacer(),
+        Column(
+          textDirection: TextDirection.rtl,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(name,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(profession),
+            Text(location),
+          ],
+        ),
+        Spacer(),
+        TextButton(
+            onPressed: () {},
+            child: Icon(calendar_today, size: 24, color: Colors.black)),
+        IconButton(
+          icon: SvgPicture.string(
+            _svg_ju4z8i,
+            allowDrawingOutsideViewBox: true,
+            fit: BoxFit.fill,
+          ),
+          onPressed: () {},
+        ),
+      ],
+    ));
+  }
+}
+
 class ListReceivedRequest extends StatelessWidget {
   ListReceivedRequest(String user_name, String user_pro, String user_loc) {
     name = user_name;
     profession = user_pro;
     loc = user_loc;
   }
+
   String? name;
   String? profession;
   String? loc;
