@@ -68,7 +68,7 @@ class ReceivedRequestsPageNew extends StatelessWidget {
               "התור הנבחר להחלפה",
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            Doctor("אלון ווייסגור", "רופא", "שוהם"),
+            DoctorList(),
             ButtonList(),
             Expanded(
               flex: 2,
@@ -196,64 +196,77 @@ class DoctorList extends StatefulWidget {
 }
 
 class _DoctorListState extends State<DoctorList> {
-  final PageController _pageController = PageController(initialPage: 0);
-  int _currentIndex = 0;
-
-  List<Widget> _widgets = [
-    Doctor("אלון", "ווייסגור", "רופא"),
-    Doctor("אלון", "ווייסגור", "מלך"),
-    Doctor("אלון", "ווייסגור", "תותח על"),
+  int _selectedIndex = 0;
+  List<Doctor> _items = [
+    Doctor("אלון ווייסגור", "רופא", "שוהם"),
+    Doctor("כרמל בר", "אחות", "חולון"),
+    Doctor("ניסים ברמי", "מנתח", "תל אביב"),
   ];
+
+  void _incrementIndex() {
+    setState(() {
+      _selectedIndex = (_selectedIndex + 1) % _items.length;
+    });
+  }
+
+  void _decrementIndex() {
+    setState(() {
+      _selectedIndex = (_selectedIndex - 1 + _items.length) % _items.length;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Card(
+        child: Row(
+      textDirection: TextDirection.rtl,
       children: [
-        Expanded(
-          child: PageView(
-            controller: _pageController,
-            children: _widgets,
-            onPageChanged: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
+        IconButton(
+          icon: SvgPicture.string(
+            _svg_wfqzrk,
+            allowDrawingOutsideViewBox: true,
+            fit: BoxFit.fill,
           ),
+          onPressed: _decrementIndex,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _widgets.asMap().entries.map((entry) {
-            int index = entry.key;
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  _pageController.jumpToPage(index);
-                  _currentIndex = index;
-                });
-              },
-              child: Container(
-                width: 10.0,
-                height: 10.0,
-                margin: EdgeInsets.symmetric(horizontal: 4.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: _currentIndex == index ? Colors.blue : Colors.grey,
-                ),
-              ),
-            );
-          }).toList(),
+        SvgPicture.string(
+          _svg_qcrh9k,
+          allowDrawingOutsideViewBox: true,
+          fit: BoxFit.fill,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Doctor(
+              _items[_selectedIndex].name,
+              _items[_selectedIndex].profession,
+              _items[_selectedIndex].location),
+        ),
+        Spacer(),
+        TextButton(
+            onPressed: () {},
+            child: Icon(calendar_today, size: 24, color: Colors.black)),
+        IconButton(
+          icon: SvgPicture.string(
+            _svg_ju4z8i,
+            allowDrawingOutsideViewBox: true,
+            fit: BoxFit.fill,
+          ),
+          onPressed: _incrementIndex,
         ),
       ],
-    );
+    ));
   }
 }
 
-class Doctor extends StatelessWidget {
-  final String name;
-  final String profession;
-  final String location;
+class DoctorCard extends StatelessWidget {
+  final int selectedIndex;
+  final List<Doctor> items;
+  final Function(int) onIndexChanged;
 
-  const Doctor(this.name, this.profession, this.location);
+  DoctorCard(
+      {required this.selectedIndex,
+      required this.items,
+      required this.onIndexChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -274,16 +287,10 @@ class Doctor extends StatelessWidget {
           allowDrawingOutsideViewBox: true,
           fit: BoxFit.fill,
         ),
-        Spacer(),
-        Column(
-          textDirection: TextDirection.rtl,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(name,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text(profession),
-            Text(location),
-          ],
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Doctor(items[selectedIndex].name,
+              items[selectedIndex].profession, items[selectedIndex].location),
         ),
         Spacer(),
         TextButton(
@@ -299,6 +306,27 @@ class Doctor extends StatelessWidget {
         ),
       ],
     ));
+  }
+}
+
+class Doctor extends StatelessWidget {
+  final String name;
+  final String profession;
+  final String location;
+
+  const Doctor(this.name, this.profession, this.location);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      textDirection: TextDirection.rtl,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(name, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        Text(profession),
+        Text(location),
+      ],
+    );
   }
 }
 
