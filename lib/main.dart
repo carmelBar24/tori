@@ -32,15 +32,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  try {
-    //TODO apply some security in the firebase and in the flutter app itself for writing and reading info.
-    //TODO go to the firebase using the Tori account go to Database and the rules section for connecting with security
-    FirebaseFirestore db = FirebaseFirestore.instance;
-    db.collection('Data').add({'mail': 'Shay@gmail.com', 'password': '12345'});
-  } catch (e) {
-    print('Error writing to Firestore: $e');
-  }
-
   runApp(ToriApp());
 }
 
