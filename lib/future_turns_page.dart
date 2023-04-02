@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'firebase_functions_db.dart' ;
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 IconData calendar_today = IconData(0xe122, fontFamily: 'MaterialIcons');
 const String _svg_qcrh9k =
@@ -23,10 +25,10 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
   List name=[] ;
   List profession=[];
   List location=[];
+  late bool isFinish=false;
   @override
   void initState(){
-    buildLists();
-    print(name);
+    showSpinner();
   }
   @override
   Widget build(BuildContext context) {
@@ -82,7 +84,14 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
               child: Container(
                 margin: EdgeInsets.only(top: 10.0),
                 color: Colors.white,
-                child: Scrollbar(
+                child: name.isEmpty?Container(
+                  color:Color(0xfff4f5f3),
+                  child: SleekCircularSlider(
+              appearance: CircularSliderAppearance(
+              spinnerMode: true,
+                customColors: CustomSliderColors(trackColor: Colors.white,progressBarColor: Colors.lightBlue),
+              )))
+                    :Scrollbar(
                   thickness: 10,
                   isAlwaysShown: true,
                   child: ListView(
@@ -126,12 +135,9 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(
-                        Icons.home_outlined, color: Colors.white, size: 45.0,),
-                      Icon(Icons.perm_contact_calendar_outlined,
-                        color: Colors.white, size: 45.0,),
-                      Icon(
-                        Icons.calendar_month, color: Colors.white, size: 45.0,)
+                      TextButton(child: Icon(Icons.home_outlined,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'homePage');}),
+                      TextButton(child: Icon(Icons.perm_contact_calendar_outlined,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'futureTurnsPage');}),
+                      TextButton(child: Icon(Icons.calendar_month,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'swapPage');},)
                     ],
                   )
               ),
@@ -143,7 +149,7 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
     );
   }
 
-  void buildLists() async {
+  Future buildLists() async {
     var turns = await db().getAppointments();
     setState(() {
       for (var docSnapshot in turns) {
@@ -152,6 +158,10 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
         location?.add(docSnapshot.data()["City"]);
       }
     });
+    }
+
+  void showSpinner() async{
+     await buildLists();
   }
 }
 

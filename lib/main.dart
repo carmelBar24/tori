@@ -39,6 +39,18 @@ class ToriApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Tori', home: HomePage());
+    return MaterialApp(
+      title: 'Tori',
+      initialRoute:'homePage',
+      routes: {
+        'homePage':(context) => HomePage(),
+        'loginPage':(context) => LoginPage(),
+        'futureTurnsPage':(context) => FutureTurnsPage(),
+        'filterPage':(context) => FilterPage(),
+        'receivedPage':(context) => ReceivedRequestsPage(),
+        'sentPage':(context) => SentRequestsPage(),
+        'swapPage':(context) => SwapPage(),
+      },
+    );
   }
 }
