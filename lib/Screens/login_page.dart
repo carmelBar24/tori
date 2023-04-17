@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'firebase_functions_db.dart' ;
+import '../database/firebase_functions_db.dart' ;
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   String id="";
@@ -121,6 +121,7 @@ class LoginPage extends StatelessWidget {
                         ], color: const Color(0xffffffff)
                         ),
                         child: TextField(
+                          obscureText: true,
                           onChanged: (pass){
                             password=pass;
                           },
@@ -157,6 +158,7 @@ class LoginPage extends StatelessWidget {
                 child: TextButton(
                   onPressed: ()async{
                     bool res=await database.checkIfUserExists(id, password);
+                    print(res);
                     if(res==true)
                       {
                         Navigator.pushNamed(context, 'futureTurnsPage');
@@ -183,41 +185,6 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 120.0,
             ),
-            Expanded(
-              child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment(1.036, -5.162),
-                      end: Alignment(-1.255, 7.254),
-                      colors: [const Color(0xff9dcbff), const Color(0xff3e8adf)],
-                      stops: [0.0, 1.0],
-                    ),
-                    borderRadius: BorderRadius.circular(30.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0x29000000),
-                        offset: Offset(5, 5),
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                  margin: EdgeInsets.symmetric(horizontal: 20.0),
-                  height: 10.0,
-                  width: double.infinity,
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Center(child: TextButton(child: Icon(Icons.home_outlined,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'homePage');})),
-                      Center(child: TextButton(child: Icon(Icons.perm_contact_calendar_outlined,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'futureTurnsPage');})),
-                      Center(child: TextButton(child: Icon(Icons.calendar_month,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'swapPage');},))
-                    ],
-                  )
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            )
-
           ],
         ),
       ),

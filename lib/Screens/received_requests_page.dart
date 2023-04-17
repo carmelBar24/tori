@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tori/Widgets/menu.dart';
 
 IconData calendar_today = IconData(0xe122, fontFamily: 'MaterialIcons');
 const String _svg_qcrh9k =
@@ -95,49 +96,7 @@ class ReceivedRequestsPage extends StatelessWidget {
               height: 30.0,
             ),
             Flexible(
-              child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment(1.036, -5.162),
-                      end: Alignment(-1.255, 7.254),
-                      colors: [
-                        const Color(0xff9dcbff),
-                        const Color(0xff3e8adf)
-                      ],
-                      stops: [0.0, 1.0],
-                    ),
-                    borderRadius: BorderRadius.circular(30.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0x29000000),
-                        offset: Offset(5, 5),
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                  margin: EdgeInsets.all(20.0),
-                  height: 80.0,
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        Icons.home_outlined,
-                        color: Colors.white,
-                        size: 45.0,
-                      ),
-                      Icon(
-                        Icons.perm_contact_calendar_outlined,
-                        color: Colors.white,
-                        size: 45.0,
-                      ),
-                      Icon(
-                        Icons.calendar_month,
-                        color: Colors.white,
-                        size: 45.0,
-                      )
-                    ],
-                  )),
+              child: menu(),
             ),
           ],
         ),

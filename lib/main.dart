@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'firebase_options.dart';
+import 'database/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'filter_page.dart';
-import 'future_turns_page.dart';
-import 'home_page.dart';
-import 'login_page.dart';
-import 'received_requests_page.dart';
-import 'sent_requests_page.dart';
-import 'swap_page.dart';
+import 'database/firebase_options.dart';
+import 'Screens/filter_page.dart';
+import 'Screens/future_turns_page.dart';
+import 'Screens/home_page.dart';
+import 'Screens/login_page.dart';
+import 'Screens/received_requests_page.dart';
+import 'Screens/sent_requests_page.dart';
+import 'Screens/swap_page.dart';
 
-import 'filter_page.dart';
-import 'future_turns_page.dart';
-import 'home_page.dart';
-import 'login_page.dart';
-import 'received_requests_page.dart';
-import 'sent_requests_page.dart';
-import 'swap_page.dart';
+import 'Screens/filter_page.dart';
+import 'Screens/future_turns_page.dart';
+import 'Screens/home_page.dart';
+import 'Screens/login_page.dart';
+import 'Screens/received_requests_page.dart';
+import 'Screens/sent_requests_page.dart';
+import 'Screens/swap_page.dart';
 
 void main() async {
   // Ensure that widget binding is initialized before calling Firebase.initializeApp()
