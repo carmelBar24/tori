@@ -41,15 +41,15 @@ class ToriApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tori',
-      initialRoute:'homePage',
+      initialRoute: 'homePage',
       routes: {
-        'homePage':(context) => HomePage(),
-        'loginPage':(context) => LoginPage(),
-        'futureTurnsPage':(context) => FutureTurnsPage(),
-        'filterPage':(context) => FilterPage(),
-        'receivedPage':(context) => ReceivedRequestsPage(),
-        'sentPage':(context) => SentRequestsPage(),
-        'swapPage':(context) => SwapPage(),
+        'homePage': (context) => FutureTurnsPage(),
+        'loginPage': (context) => LoginPage(),
+        'futureTurnsPage': (context) => FutureTurnsPage(),
+        'filterPage': (context) => FilterPage(),
+        'receivedPage': (context) => ReceivedRequestsPage(),
+        'sentPage': (context) => SentRequestsPage(),
+        'swapPage': (context) => SwapPage(),
       },
     );
   }
