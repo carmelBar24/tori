@@ -34,8 +34,8 @@ class menu extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextButton(child: Icon(Icons.home_outlined,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'futureTurnsPage');}),
-            TextButton(child: Icon(Icons.perm_contact_calendar_outlined,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'swapPage');}),
-            TextButton(child: Icon(Icons.calendar_month,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'receivedPage');},)
+            TextButton(child: ImageIcon(AssetImage('images/center_icon.png'),color: Colors.white,size: 45.0),onPressed: (){Navigator.pushNamed(context, 'swapPage');}),
+            TextButton(child:ImageIcon(AssetImage('images/left_icon.png'),color: Colors.white,size: 45.0),onPressed: (){Navigator.pushNamed(context, 'receivedPage');},)
           ],
         )
     );
