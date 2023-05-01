@@ -15,7 +15,8 @@ const String _svg_etkibk =
 
 
 class FutureTurnsPage extends StatefulWidget {
-  const FutureTurnsPage({Key? key}) : super(key: key);
+   String user_id;
+   FutureTurnsPage({Key? key, required this.user_id}) : super(key: key);
 
   @override
   State<FutureTurnsPage> createState() => _FutureTurnsPageState();
@@ -32,6 +33,7 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
   }
   @override
   Widget build(BuildContext context) {
+    print(widget.user_id);
     return Scaffold(
       backgroundColor: const Color(0xfff4f5f3),
       body: SafeArea(

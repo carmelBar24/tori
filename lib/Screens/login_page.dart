@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tori/Screens/future_turns_page.dart';
 import '../database/firebase_functions_db.dart' ;
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -161,7 +162,7 @@ class LoginPage extends StatelessWidget {
                     print(res);
                     if(res==true)
                       {
-                        Navigator.pushNamed(context, 'futureTurnsPage');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>  FutureTurnsPage(user_id: id,)));
                       }
                     else{
                       // TODO: ask nisim
