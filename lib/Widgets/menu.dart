@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 
-class menu extends StatelessWidget {
-  const menu({
+
+
+class menu extends StatefulWidget {
+  String home;
+  String contact;
+  String month;
+  menu({
     super.key,
+    required this.home,
+    required this.contact,
+    required this.month
   });
 
+  @override
+  State<menu> createState() => _menuState();
+}
+
+class _menuState extends State<menu> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,11 +46,13 @@ class menu extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TextButton(child: Icon(Icons.home_outlined,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'futureTurnsPage');}),
-            TextButton(child: Icon(Icons.perm_contact_calendar_outlined,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'swapPage');}),
-            TextButton(child: Icon(Icons.calendar_month,color: Colors.white,size: 45.0,),onPressed: (){Navigator.pushNamed(context, 'receivedPage');},)
+            TextButton(child: SizedBox(child: Image.asset(widget.home,fit: BoxFit.fitHeight,),width: 45,height: 45,),onPressed: (){Navigator.pushNamed(context, 'futureTurnsPage');}),
+            TextButton(child: SizedBox(child: Image.asset(widget.contact,fit: BoxFit.fitHeight),width: 45,height: 45),onPressed: (){Navigator.pushNamed(context, 'swapPage');}),
+            TextButton(child: SizedBox(child:Image.asset(widget.month,fit: BoxFit.fitHeight),width: 45,height: 45),onPressed: (){Navigator.pushNamed(context, 'receivedPage');},)
           ],
         )
     );
   }
 }
+
+
