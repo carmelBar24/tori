@@ -69,29 +69,31 @@ class ReceivedRequestsPage extends StatelessWidget {
               "התור הנבחר להחלפה",
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            DoctorList(),
-            ButtonList(),
-            Expanded(
-              flex: 2,
-              child: Container(
-                margin: EdgeInsets.only(top: 20.0),
-                color: Colors.white,
-                child: Scrollbar(
-                  thickness: 10,
-                  isAlwaysShown: true,
-                  child: ListView(
-                    children: [
-                      ListReceivedRequest("Alon", "Alon", "Alon"),
-                      ListReceivedRequest("Alon", "Alon", "Alon"),
-                      ListReceivedRequest("Alon", "Alon", "Alon"),
-                      ListReceivedRequest("Alon", "Alon", "Alon"),
-                      ListReceivedRequest("Alon", "Alon", "Alon"),
-                      ListReceivedRequest("Alon", "Alon", "Alon"),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // DoctorList(),
+            Expanded(flex: 2, child: MyWidget())
+            // ButtonList(),
+            // Expanded(
+            //   flex: 2,
+            //   child: Container(
+            //     margin: EdgeInsets.only(top: 20.0),
+            //     color: Colors.white,
+            //     child: Scrollbar(
+            //       thickness: 10,
+            //       isAlwaysShown: true,
+            //       child: ListView(
+            //         children: [
+            //           ListReceivedRequest("Alon", "Alon", "Alon"),
+            //           ListReceivedRequest("Alon", "Alon", "Alon"),
+            //           ListReceivedRequest("Alon", "Alon", "Alon"),
+            //           ListReceivedRequest("Alon", "Alon", "Alon"),
+            //           ListReceivedRequest("Alon", "Alon", "Alon"),
+            //           ListReceivedRequest("Alon", "Alon", "Alon"),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            ,
             SizedBox(
               height: 30.0,
             ),
@@ -165,7 +167,20 @@ class _DoctorListState extends State<DoctorList> {
   void _incrementIndex() {
     setState(() {
       _selectedIndex = (_selectedIndex + 1) % _items.length;
+      getTurnsQueue();
     });
+  }
+
+  Doctor getDoctorTurn() {
+    return new Doctor("אלון", "רופא", "יפו");
+  }
+
+  void getTurnsQueue() {
+    _items = [
+      Doctor("אלון ווייסגור", "רופא", "יפו"),
+      Doctor("כרמל בר", "אחות", "חולון"),
+      Doctor("ניסים ברמי", "מנתח", "תל אביב"),
+    ];
   }
 
   void _decrementIndex() {
@@ -284,6 +299,138 @@ class Doctor extends StatelessWidget {
         Text(name, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         Text(profession),
         Text(location),
+      ],
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  List<Widget> _selectedWidgetList = [];
+
+  int _selectedIndex = 0;
+  List<Doctor> _items = [
+    Doctor("אלון ווייסגור", "רופא עור", "שוהם"),
+    Doctor("יוסי", "רופא שיניים", "חולון"),
+    Doctor("מוטי", "רופא מוח", "תל אביב"),
+  ];
+
+  void _incrementIndex() {
+    setState(() {
+      _selectedIndex = (_selectedIndex + 1) % _items.length;
+      _changeSelectedWidgetList(_selectedIndex);
+    });
+  }
+
+  Doctor getDoctorTurn() {
+    return new Doctor("אלון", "רופא", "יפו");
+  }
+
+  void getTurnsQueue() {
+    _items = [
+      Doctor("אלון ווייסגור", "רופא עור", "שוהם"),
+      Doctor("יוסי", "רופא שיניים", "חולון"),
+      Doctor("מוטי", "רופא מוח", "תל אביב"),
+    ];
+  }
+
+  void _decrementIndex() {
+    setState(() {
+      _selectedIndex = (_selectedIndex - 1 + _items.length) % _items.length;
+      _changeSelectedWidgetList(_selectedIndex);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedWidgetList = _items; // initialize selected list with default
+  }
+
+  void _changeSelectedWidgetList(int buttonIndex) {
+    setState(() {
+      switch (buttonIndex) {
+        case 0:
+          _selectedWidgetList = [
+            ListReceivedRequest('אלון', 'רופא עור', 'שוהם'),
+            ListReceivedRequest('יוסי', 'רופא עור', 'יפו'),
+            ListReceivedRequest('חן', 'רופא עור', 'חיפה'),
+          ];
+          break;
+        case 1:
+          _selectedWidgetList = [
+            ListReceivedRequest('ולדימיר', 'רופא שיניים', 'עפולה'),
+            ListReceivedRequest('ספיר', 'רופא שיניים', 'רמת דוד'),
+            ListReceivedRequest('רון', 'רופא שיניים', 'נהריה'),
+          ];
+          break;
+        case 2:
+          _selectedWidgetList = [
+            ListReceivedRequest('אביגדור', 'רופא מוח', 'תל אביב'),
+            ListReceivedRequest('מוטי', 'רופא מוח', 'אילת'),
+            ListReceivedRequest('רון', 'רופא מוח', 'דימונה'),
+          ];
+          break;
+        default:
+          _selectedWidgetList = _items;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Card(
+            child: Row(
+          textDirection: TextDirection.rtl,
+          children: [
+            IconButton(
+              icon: SvgPicture.string(
+                _svg_wfqzrk,
+                allowDrawingOutsideViewBox: true,
+                fit: BoxFit.fill,
+              ),
+              onPressed: _decrementIndex,
+            ),
+            SvgPicture.string(
+              _svg_qcrh9k,
+              allowDrawingOutsideViewBox: true,
+              fit: BoxFit.fill,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Doctor(
+                  _items[_selectedIndex].name,
+                  _items[_selectedIndex].profession,
+                  _items[_selectedIndex].location),
+            ),
+            Spacer(),
+            TextButton(
+                onPressed: () {},
+                child: Icon(calendar_today, size: 24, color: Colors.black)),
+            IconButton(
+              icon: SvgPicture.string(
+                _svg_ju4z8i,
+                allowDrawingOutsideViewBox: true,
+                fit: BoxFit.fill,
+              ),
+              onPressed: _incrementIndex,
+            ),
+          ],
+        )),
+        Expanded(
+          child: ListView.builder(
+            itemCount: _selectedWidgetList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return _selectedWidgetList[index];
+            },
+          ),
+        ),
       ],
     );
   }
