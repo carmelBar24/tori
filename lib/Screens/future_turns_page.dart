@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:flutter/material.dart';
 import '../Widgets/menu.dart';
+
 import '../database/firebase_functions_db.dart' ;
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
@@ -15,8 +17,7 @@ const String _svg_etkibk =
 
 
 class FutureTurnsPage extends StatefulWidget {
-   String user_id;
-   FutureTurnsPage({Key? key, required this.user_id}) : super(key: key);
+   FutureTurnsPage({Key? key}) : super(key: key);
 
   @override
   State<FutureTurnsPage> createState() => _FutureTurnsPageState();
@@ -33,7 +34,6 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
   }
   @override
   Widget build(BuildContext context) {
-    print(widget.user_id);
     return Scaffold(
       backgroundColor: const Color(0xfff4f5f3),
       body: SafeArea(
@@ -100,10 +100,6 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
                     children: [
                       ListNode(name[0], profession[0],location[0]),
                       ListNode(name[1], profession[1],location[1]),
-                      ListNode(name[2], profession[2],location[2]),
-                      ListNode(name[0], profession[0],location[0]),
-                      ListNode(name[1], profession[1],location[1]),
-                      ListNode(name[2], profession[2],location[2]),
                     ],
                   ),
                 ),
@@ -111,7 +107,7 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
             ),
             SizedBox(height: 120.0,),
             Flexible(
-              child: menu(home: "images/press-home.png",contact: "images/unpress-contact.png",month:"images/unpress-month.png"),
+              child: menu(home: "images/unpress-home.png",contact: "images/unpress-contact.png",month:"images/unpress-month.png"),
             ),
 
           ],

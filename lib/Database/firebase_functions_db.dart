@@ -2,7 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
-
+ import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -12,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
    }
 
    final firestore = FirebaseFirestore.instance;
+   var auth=FirebaseAuth.instance;
 
    Future checkIfUserExists(String id, String password) async {
      print(id);
@@ -42,7 +43,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
    }
 
    Future getAppointments() async {
-     final docRef = await firestore.collection("Future Queues").get();
+     final user=auth.currentUser?.uid;
+     print(user);
+     final docRef = await firestore.collection("Future Queues").where("Id",isEqualTo: user).get();
        print("Successfully completed");
        for (var docSnapshot in docRef.docs) {
          print('${docSnapshot.id} => ${docSnapshot.data()}');
