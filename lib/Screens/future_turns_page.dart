@@ -24,10 +24,8 @@ class FutureTurnsPage extends StatefulWidget {
 }
 
 class _FutureTurnsPageState extends State<FutureTurnsPage> {
-  List name=[] ;
-  List profession=[];
-  List location=[];
   late bool isFinish=false;
+  List<Widget> nodes=[];
   @override
   void initState(){
     showSpinner();
@@ -86,7 +84,7 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
               child: Container(
                 margin: EdgeInsets.only(top: 10.0),
                 color: Colors.white,
-                child: name.isEmpty?Container(
+                child: nodes.isEmpty?Container(
                   color:Color(0xfff4f5f3),
                   child: SleekCircularSlider(
               appearance: CircularSliderAppearance(
@@ -97,17 +95,15 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
                   thickness: 10,
                   isAlwaysShown: true,
                   child: ListView(
-                    children: [
-                      ListNode(name[0], profession[0],location[0]),
-                      ListNode(name[1], profession[1],location[1]),
-                    ],
+
+                    children: nodes,
                   ),
                 ),
               ),
             ),
             SizedBox(height: 120.0,),
             Flexible(
-              child: menu(home: "images/unpress-home.png",contact: "images/unpress-contact.png",month:"images/unpress-month.png"),
+              child: menu(home: "images/unpress-home.png",contact: "images/unpress-contact.png",month:"images/unpress-month.png",num: 1),
             ),
 
           ],
@@ -120,11 +116,10 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
     var turns = await db().getAppointments();
     setState(() {
       for (var docSnapshot in turns) {
-        name?.add(docSnapshot.data()["DoctorName"]);
-        profession?.add(docSnapshot.data()["Profession"]);
-        location?.add(docSnapshot.data()["City"]);
+        nodes.add(ListNode(docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],docSnapshot.data()["City"]));
       }
     });
+    print(nodes.length);
     }
 
   void showSpinner() async{
