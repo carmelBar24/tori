@@ -129,7 +129,7 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
         location?.add(docSnapshot.data()["City"]);
       }
     });
-    }
+  }
 
   void showSpinner() async{
      await buildLists();
