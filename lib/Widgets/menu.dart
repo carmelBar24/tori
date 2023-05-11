@@ -6,11 +6,13 @@ class menu extends StatefulWidget {
   String home;
   String contact;
   String month;
+  int num;
   menu({
     super.key,
     required this.home,
     required this.contact,
-    required this.month
+    required this.month,
+    required this.num
   });
 
   @override
@@ -46,9 +48,9 @@ class _menuState extends State<menu> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TextButton(child: SizedBox(child: Image.asset(widget.home,fit: BoxFit.fitHeight,),width: 45,height: 45,),onPressed: (){Navigator.pushNamed(context, 'futureTurnsPage');}),
-            TextButton(child: SizedBox(child: Image.asset(widget.contact,fit: BoxFit.fitHeight),width: 45,height: 45),onPressed: (){Navigator.pushNamed(context, 'swapPage');}),
-            TextButton(child: SizedBox(child:Image.asset(widget.month,fit: BoxFit.fitHeight),width: 45,height: 45),onPressed: (){Navigator.pushNamed(context, 'receivedPage');},)
+            widget.num!=1?TextButton(child: SizedBox(child: Image.asset(widget.home,fit: BoxFit.fitHeight,),width: 45,height: 45),onPressed: (){Navigator.pushNamed(context, 'futureTurnsPage');}):TextButton(child: SizedBox(child: Image.asset(widget.home,fit: BoxFit.fitHeight,),width: 45,height: 45,),onPressed: (){Navigator.pushNamed(context, 'futureTurnsPage');},style: ButtonStyle(shadowColor: MaterialStateProperty.all(Colors.lightBlue.shade400),elevation: MaterialStateProperty.all(10),shape:MaterialStateProperty.all( RoundedRectangleBorder(borderRadius:  BorderRadius.circular(40))))),
+            widget.num!=2?TextButton(child: SizedBox(child: Image.asset(widget.contact,fit: BoxFit.fitHeight,),width: 45,height: 45),onPressed: (){Navigator.pushNamed(context, 'swapPage');}):TextButton(child: SizedBox(child: Image.asset(widget.contact,fit: BoxFit.fitHeight,),width: 45,height: 45,),onPressed: (){Navigator.pushNamed(context, 'swapPage');},style: ButtonStyle(shadowColor: MaterialStateProperty.all(Colors.lightBlue.shade400),elevation: MaterialStateProperty.all(10),shape:MaterialStateProperty.all( RoundedRectangleBorder(borderRadius:  BorderRadius.circular(40))))),
+            widget.num!=3?TextButton(child: SizedBox(child: Image.asset(widget.month,fit: BoxFit.fitHeight,),width: 45,height: 45),onPressed: (){Navigator.pushNamed(context, 'receivedPage');}):TextButton(child: SizedBox(child: Image.asset(widget.month,fit: BoxFit.fitHeight,),width: 45,height: 45,),onPressed: (){Navigator.pushNamed(context, 'receivedPage');},style: ButtonStyle(shadowColor: MaterialStateProperty.all(Colors.lightBlue.shade400),elevation: MaterialStateProperty.all(10),shape:MaterialStateProperty.all( RoundedRectangleBorder(borderRadius:  BorderRadius.circular(40))))),
           ],
         )
     );

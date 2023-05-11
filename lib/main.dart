@@ -45,7 +45,7 @@ class ToriApp extends StatelessWidget {
       routes: {
         'homePage':(context) => HomePage(),
         'loginPage':(context) => LoginPage(),
-        'futureTurnsPage':(context) => FutureTurnsPage(user_id: "",),
+        'futureTurnsPage':(context) => FutureTurnsPage(),
         'filterPage':(context) => FilterPage(),
         'receivedPage':(context) => ReceivedRequestsPage(),
         'sentPage':(context) => SentRequestsPage(),

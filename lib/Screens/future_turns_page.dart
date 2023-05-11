@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:flutter/material.dart';
 import '../Widgets/menu.dart';
+
 import '../database/firebase_functions_db.dart' ;
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
@@ -15,25 +17,21 @@ const String _svg_etkibk =
 
 
 class FutureTurnsPage extends StatefulWidget {
-   String user_id;
-   FutureTurnsPage({Key? key, required this.user_id}) : super(key: key);
+   FutureTurnsPage({Key? key}) : super(key: key);
 
   @override
   State<FutureTurnsPage> createState() => _FutureTurnsPageState();
 }
 
 class _FutureTurnsPageState extends State<FutureTurnsPage> {
-  List name=[] ;
-  List profession=[];
-  List location=[];
   late bool isFinish=false;
+  List<Widget> nodes=[];
   @override
   void initState(){
     showSpinner();
   }
   @override
   Widget build(BuildContext context) {
-    print(widget.user_id);
     return Scaffold(
       backgroundColor: const Color(0xfff4f5f3),
       body: SafeArea(
@@ -86,7 +84,7 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
               child: Container(
                 margin: EdgeInsets.only(top: 10.0),
                 color: Colors.white,
-                child: name.isEmpty?Container(
+                child: nodes.isEmpty?Container(
                   color:Color(0xfff4f5f3),
                   child: SleekCircularSlider(
               appearance: CircularSliderAppearance(
@@ -97,21 +95,15 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
                   thickness: 10,
                   isAlwaysShown: true,
                   child: ListView(
-                    children: [
-                      ListNode(name[0], profession[0],location[0]),
-                      ListNode(name[1], profession[1],location[1]),
-                      ListNode(name[2], profession[2],location[2]),
-                      ListNode(name[0], profession[0],location[0]),
-                      ListNode(name[1], profession[1],location[1]),
-                      ListNode(name[2], profession[2],location[2]),
-                    ],
+
+                    children: nodes,
                   ),
                 ),
               ),
             ),
             SizedBox(height: 120.0,),
             Flexible(
-              child: menu(home: "images/press-home.png",contact: "images/unpress-contact.png",month:"images/unpress-month.png"),
+              child: menu(home: "images/unpress-home.png",contact: "images/unpress-contact.png",month:"images/unpress-month.png",num: 1),
             ),
 
           ],
@@ -124,12 +116,12 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
     var turns = await db().getAppointments();
     setState(() {
       for (var docSnapshot in turns) {
-        name?.add(docSnapshot.data()["DoctorName"]);
-        profession?.add(docSnapshot.data()["Profession"]);
-        location?.add(docSnapshot.data()["City"]);
+        nodes.add(ListNode(docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],docSnapshot.data()["City"]));
       }
     });
+    print(nodes.length);
   }
+
 
   void showSpinner() async{
      await buildLists();

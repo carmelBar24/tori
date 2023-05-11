@@ -1,15 +1,26 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:tori/Screens/future_turns_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../Database/firebase_functions_db.dart';
 import 'package:tori/Database/local_firebase_functions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:tori/Screens/future_turns_page.dart';
 
-class LoginPage extends StatelessWidget {
+
+class LoginPage extends StatefulWidget {
+
   LoginPage({Key? key}) : super(key: key);
-  String id="";
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String email="";
   String password="";
   db database=db();
+  String text="";
+  bool result=false;
+  var _auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +86,7 @@ class LoginPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                          'תעודת זהות',
+                          'אימייל',
                           style: TextStyle(
                             fontFamily: 'Noto Sans Hebrew',
                             fontSize: 20,
@@ -94,7 +105,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         child: TextField(
                           onChanged: (id_user){
-                            id=id_user;
+                            email=id_user;
                           },
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -131,6 +142,7 @@ class LoginPage extends StatelessWidget {
                             password=pass;
                           },
                           decoration: InputDecoration(
+                            errorText: result?text:null,
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 0.5,
@@ -162,31 +174,49 @@ class LoginPage extends StatelessWidget {
                 },
                 child: TextButton(
                   onPressed: ()async{
-                    bool res=await database.checkIfUserExists(id, password);
-                    print(res);
-                    var requests = await database.getUserDocumentId(id);
-                    print("right down is the result");
-                    print(requests);
-                    List<Meeting> meet = await database.getPersonMeetings(requests);
-                    Meeting firstMeeting = meet[0];
-
-                    DataHandling data =  DataHandling();
-                    List DoctorDocumentId = data.DoctorList(meet);
-                    List<String> docs =  await database.DoctorValues(DoctorDocumentId[0]);
-                    print("try");
-                    print(docs);
-                    print("try");
-
-
-                    print(meet[0].data);
-                    print(meet[0].documentId);
-                    if(res==true)
-                      {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) =>  FutureTurnsPage(user_id: id,)));
-                      }
-                    else{
-                      // TODO: ask nisim
-                      print("not good");
+// <<<<<<< HEAD
+//                     bool res=await database.checkIfUserExists(id, password);
+//                     print(res);
+//                     var requests = await database.getUserDocumentId(id);
+//                     print("right down is the result");
+//                     print(requests);
+//                     List<Meeting> meet = await database.getPersonMeetings(requests);
+//                     Meeting firstMeeting = meet[0];
+//
+//                     DataHandling data =  DataHandling();
+//                     List DoctorDocumentId = data.DoctorList(meet);
+//                     List<String> docs =  await database.DoctorValues(DoctorDocumentId[0]);
+//                     print("try");
+//                     print(docs);
+//                     print("try");
+//
+//
+//                     print(meet[0].data);
+//                     print(meet[0].documentId);
+//                     if(res==true)
+//                       {
+//                         Navigator.push(context, MaterialPageRoute(builder: (context) =>  FutureTurnsPage(user_id: id,)));
+//                       }
+//                     else{
+//                       // TODO: ask nisim
+//                       print("not good");
+// =======
+                    try {
+                      print(email);
+                      print(password);
+                      setState(() {
+                        result=false;
+                      });
+                      final user = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+                      Navigator.pushNamed(context,'futureTurnsPage');
+                    }
+                    catch(e){
+                      print(e);
+                      setState(() {
+                        text="Something went wrong";
+                        result=true;
+                      });
                     }
 
                   },
@@ -212,3 +242,5 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
+
