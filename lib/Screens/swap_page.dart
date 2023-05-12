@@ -325,7 +325,7 @@ class _MyWidgetState extends State<MyWidget> {
   List<ListReceivedRequest> _selectedWidgetList = [];
 
   int _selectedIndex = 0;
-  int _selectedTurn = 0;
+  int _selectedTurn = -1;
 
   List<bool> _selections = [];
 
@@ -338,6 +338,7 @@ class _MyWidgetState extends State<MyWidget> {
   void _incrementIndex() {
     setState(() {
       _selectedIndex = (_selectedIndex + 1) % _items.length;
+      _selectedTurn = -1;
       _changeSelectedWidgetList(_selectedIndex);
     });
   }
@@ -357,6 +358,7 @@ class _MyWidgetState extends State<MyWidget> {
   void _decrementIndex() {
     setState(() {
       _selectedIndex = (_selectedIndex - 1 + _items.length) % _items.length;
+      _selectedTurn = -1;
       _changeSelectedWidgetList(_selectedIndex);
     });
   }
@@ -444,13 +446,13 @@ class _MyWidgetState extends State<MyWidget> {
           itemCount: _selectedWidgetList.length,
           itemBuilder: (context, index) {
             return Container(
-              color: _selectedIndex == index ? Colors.blue : Colors.transparent,
+              color: _selectedTurn == index ? Colors.blue : Colors.transparent,
               child: ListTile(
                 title: _selectedWidgetList[index],
                 selected: _selectedIndex == index,
                 onTap: () {
                   setState(() {
-                    _selectedIndex = index;
+                    _selectedTurn = index;
                   });
                 },
               ),

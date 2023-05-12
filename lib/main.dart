@@ -43,7 +43,7 @@ class ToriApp extends StatelessWidget {
       title: 'Tori',
       initialRoute: 'homePage',
       routes: {
-        'homePage': (context) => SwapPage(),
+        'homePage': (context) => HomePage(),
         'loginPage': (context) => LoginPage(),
         'futureTurnsPage': (context) => FutureTurnsPage(),
         'filterPage': (context) => FilterPage(),
