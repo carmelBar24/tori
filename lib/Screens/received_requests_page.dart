@@ -98,7 +98,11 @@ class ReceivedRequestsPage extends StatelessWidget {
               height: 30.0,
             ),
             Flexible(
-              child: menu(home: "images/unpress-home.png",contact: "images/unpress-contact.png",month:"images/unpress-month.png",num: 3),
+              child: menu(
+                  home: "images/unpress-home.png",
+                  contact: "images/unpress-contact.png",
+                  month: "images/unpress-month.png",
+                  num: 3),
             ),
           ],
         ),
@@ -158,10 +162,10 @@ class DoctorList extends StatefulWidget {
 
 class _DoctorListState extends State<DoctorList> {
   int _selectedIndex = 0;
-  List<Doctor> _items = [
-    Doctor("אלון ווייסגור", "רופא", "שוהם"),
-    Doctor("כרמל בר", "אחות", "חולון"),
-    Doctor("ניסים ברמי", "מנתח", "תל אביב"),
+  List<ListReceivedRequest> _items = [
+    ListReceivedRequest('אלון ווייסגור', 'רופא עור', 'שוהם'),
+    ListReceivedRequest('יוסי', 'רופא שיניים', 'חולון'),
+    ListReceivedRequest('מוטי', 'רופא מוח', 'תל אביב'),
   ];
 
   void _incrementIndex() {
@@ -171,15 +175,15 @@ class _DoctorListState extends State<DoctorList> {
     });
   }
 
-  Doctor getDoctorTurn() {
-    return new Doctor("אלון", "רופא", "יפו");
+  ListReceivedRequest getDoctorTurn() {
+    return new ListReceivedRequest("אלון", "רופא", "יפו");
   }
 
   void getTurnsQueue() {
     _items = [
-      Doctor("אלון ווייסגור", "רופא", "יפו"),
-      Doctor("כרמל בר", "אחות", "חולון"),
-      Doctor("ניסים ברמי", "מנתח", "תל אביב"),
+      ListReceivedRequest('אלון ווייסגור', 'רופא עור', 'שוהם'),
+      ListReceivedRequest('יוסי', 'רופא שיניים', 'חולון'),
+      ListReceivedRequest('מוטי', 'רופא מוח', 'תל אביב'),
     ];
   }
 
@@ -313,10 +317,10 @@ class _MyWidgetState extends State<MyWidget> {
   List<Widget> _selectedWidgetList = [];
 
   int _selectedIndex = 0;
-  List<Doctor> _items = [
-    Doctor("אלון ווייסגור", "רופא עור", "שוהם"),
-    Doctor("יוסי", "רופא שיניים", "חולון"),
-    Doctor("מוטי", "רופא מוח", "תל אביב"),
+  List<ListReceivedRequest> _items = [
+    ListReceivedRequest("אלון ווייסגור", "רופא עור", "שוהם"),
+    ListReceivedRequest("יוסי", "רופא שיניים", "חולון"),
+    ListReceivedRequest("מוטי", "רופא מוח", "תל אביב"),
   ];
 
   void _incrementIndex() {
@@ -332,9 +336,9 @@ class _MyWidgetState extends State<MyWidget> {
 
   void getTurnsQueue() {
     _items = [
-      Doctor("אלון ווייסגור", "רופא עור", "שוהם"),
-      Doctor("יוסי", "רופא שיניים", "חולון"),
-      Doctor("מוטי", "רופא מוח", "תל אביב"),
+      ListReceivedRequest("אלון ווייסגור", "רופא עור", "שוהם"),
+      ListReceivedRequest("יוסי", "רופא שיניים", "חולון"),
+      ListReceivedRequest("מוטי", "רופא מוח", "תל אביב"),
     ];
   }
 
@@ -437,15 +441,12 @@ class _MyWidgetState extends State<MyWidget> {
 }
 
 class ListReceivedRequest extends StatelessWidget {
-  ListReceivedRequest(String user_name, String user_pro, String user_loc) {
-    name = user_name;
-    profession = user_pro;
-    loc = user_loc;
-  }
+  final String name;
+  final String profession;
+  final String location;
 
-  String? name;
-  String? profession;
-  String? loc;
+  const ListReceivedRequest(this.name, this.profession, this.location);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -495,7 +496,8 @@ class ListReceivedRequest extends StatelessWidget {
           name!,
           textAlign: TextAlign.right,
         ),
-        subtitle: Text(textAlign: TextAlign.right, profession! + '\n' + loc!),
+        subtitle:
+            Text(textAlign: TextAlign.right, profession + '\n' + location),
         isThreeLine: true,
       ),
     );
