@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:tori/Screens/future_turns_page.dart';
-import '../database/firebase_functions_db.dart' ;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../Database/firebase_functions_db.dart';
+import 'package:tori/Database/local_firebase_functions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:tori/Screens/future_turns_page.dart';
 
 
 class LoginPage extends StatefulWidget {
+
   LoginPage({Key? key}) : super(key: key);
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -171,6 +174,33 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: TextButton(
                   onPressed: ()async{
+// <<<<<<< HEAD
+//                     bool res=await database.checkIfUserExists(id, password);
+//                     print(res);
+//                     var requests = await database.getUserDocumentId(id);
+//                     print("right down is the result");
+//                     print(requests);
+//                     List<Meeting> meet = await database.getPersonMeetings(requests);
+//                     Meeting firstMeeting = meet[0];
+//
+//                     DataHandling data =  DataHandling();
+//                     List DoctorDocumentId = data.DoctorList(meet);
+//                     List<String> docs =  await database.DoctorValues(DoctorDocumentId[0]);
+//                     print("try");
+//                     print(docs);
+//                     print("try");
+//
+//
+//                     print(meet[0].data);
+//                     print(meet[0].documentId);
+//                     if(res==true)
+//                       {
+//                         Navigator.push(context, MaterialPageRoute(builder: (context) =>  FutureTurnsPage(user_id: id,)));
+//                       }
+//                     else{
+//                       // TODO: ask nisim
+//                       print("not good");
+// =======
                     try {
                       print(email);
                       print(password);
@@ -193,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     'כניסה',
                     style: TextStyle(
-                      fontFamily: 'Noto Sans Hebrew',
+                      fontFamily: 'Noto SansHebrew ',
                       fontSize: 20,
                       color: const Color(0xffffffff),
                       fontWeight: FontWeight.w700,

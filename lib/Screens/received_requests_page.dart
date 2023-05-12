@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tori/Widgets/menu.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tori/Database/firebase_functions_db.dart';
 
 IconData calendar_today = IconData(0xe122, fontFamily: 'MaterialIcons');
 const String _svg_qcrh9k =
@@ -14,9 +16,11 @@ const String _svg_kx5wvb =
     '<svg viewBox="53.5 258.0 320.0 74.0" ><path transform="translate(53.5, 258.0)" d="M 8 0 L 312 0 C 316.4182739257812 0 320 3.581721782684326 320 8 L 320 66 C 320 70.41828155517578 316.4182739257812 74 312 74 L 8 74 C 3.581721782684326 74 0 70.41828155517578 0 66 L 0 8 C 0 3.581721782684326 3.581721782684326 0 8 0 Z" fill="#ffffff" fill-opacity="0.85" stroke="none" stroke-width="1" stroke-opacity="0.85" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 
 class ReceivedRequestsPage extends StatelessWidget {
+
   const ReceivedRequestsPage({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,13 +123,15 @@ const String _svg_ju4z8i =
 class ButtonList extends StatefulWidget {
   const ButtonList({Key? key}) : super(key: key);
 
+
+
+
   @override
   _ButtonListState createState() => _ButtonListState();
 }
 
 class _ButtonListState extends State<ButtonList> {
   int _selectedIndex = 0;
-
   List<String> _buttonTitles = [
     'בקשות שהתקבלו',
     'בקשות שנשלחו',
