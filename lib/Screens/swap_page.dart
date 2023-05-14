@@ -149,7 +149,7 @@ class _SwapPageState extends State<SwapPage> {
                   home: "images/unpress-home.png",
                   contact: "images/unpress-contact.png",
                   month: "images/unpress-month.png",
-                  num: 3),
+                  num: 2),
             ),
           ],
         ),
