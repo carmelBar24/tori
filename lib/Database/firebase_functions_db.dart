@@ -6,6 +6,7 @@ import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tori/Screens/future_turns_page.dart';
 
+
  class db {
    db() {
      initConnection();
@@ -13,7 +14,7 @@ import 'package:tori/Screens/future_turns_page.dart';
 
    final firestore = FirebaseFirestore.instance;
    var auth=FirebaseAuth.instance;
-
+   static var docID=0;
 
    Future checkIfUserExists(String id, String password) async {
      print(id);
@@ -65,6 +66,20 @@ import 'package:tori/Screens/future_turns_page.dart';
      return docRef.docs;
    }
 
+   Future swapTurns(senderToken,receiverToken,profession,senderCity,receiverCity,senderDoctor,receiverDoctor)
+    async{
+     final swap = <String, String>{
+       "SenderToken":senderToken,
+       "ReceiverToken": receiverToken,
+       "Profession": profession,
+       "SenderCity":senderCity,
+       "ReceiverCity":receiverCity,
+       "SenderDoctorName":senderDoctor,
+       "ReceiverDoctorName":receiverDoctor
+     };
+     await firestore.collection("Sent Requests").doc((docID++).toString()).set(swap);
+
+   }
    Future getUserDocumentId(String id) async {
      final docRef = await firestore.collection("Users").where(
          "ID", isEqualTo: id).get();

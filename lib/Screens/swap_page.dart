@@ -21,6 +21,8 @@ const String _svg_kx5wvb =
 
 List<ListReceivedRequest> myItems = [];
 List<ListReceivedRequest> othersItems = [];
+int index=0;
+int _selectedTurn = -1;
 
 class SwapPage extends StatefulWidget {
   const SwapPage({Key? key}) : super(key: key);
@@ -114,7 +116,9 @@ class _SwapPageState extends State<SwapPage> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: ()  async{
+
+              },
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
@@ -151,23 +155,28 @@ class _SwapPageState extends State<SwapPage> {
   }
 
   Future buildLists() async {
-    var turns = await db().getAppointments();
     setState(() {
-      for (var docSnapshot in turns) {
-        myItems.add(ListReceivedRequest(
+      othersItems=[];
+    });
+    if(myItems.isEmpty) {
+      var turns = await db().getAppointments();
+      setState(() {
+        for (var docSnapshot in turns) {
+          myItems.add(ListReceivedRequest(
+              docSnapshot.data()["DoctorName"],
+              docSnapshot.data()["Profession"],
+              docSnapshot.data()["City"], false));
+        }
+      });
+    }
+    var others=await db().getOthersAppointments(myItems[index].profession);
+    setState(() {
+      for (var docSnapshot in others) {
+        othersItems.add(ListReceivedRequest(
             docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
             docSnapshot.data()["City"],false));
       }
     });
-   /* var others= await myDB.;
-    setState(() {
-      for (var docSnapshot in turns) {
-        myItems.add(ListReceivedRequest(
-            docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
-            docSnapshot.data()["City"],false));
-      }
-    });*/
-    print(myItems.length);
   }
   void showSpinner() async{
     await buildLists();
@@ -181,176 +190,9 @@ const String _svg_wfqzrk =
 const String _svg_ju4z8i =
     '<svg viewBox="57.0 287.9 13.0 14.9" ><path transform="matrix(0.0, -1.0, 1.0, 0.0, 57.0, 302.75)" d="M 7.430877685546875 0 L 14.86175537109375 13.00403594970703 L 0 13.00403594970703 L 7.430877685546875 0 Z" fill="#6e6f6f" stroke="#707070" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 
-class ButtonList extends StatefulWidget {
-  const ButtonList({Key? key}) : super(key: key);
 
-  @override
-  _ButtonListState createState() => _ButtonListState();
-}
 
-class _ButtonListState extends State<ButtonList> {
-  int _selectedIndex = 0;
 
-  List<String> _buttonTitles = [
-    'בקשות שהתקבלו',
-    'בקשות שנשלחו',
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: _buttonTitles.map((title) {
-        int index = _buttonTitles.indexOf(title);
-        return ElevatedButton(
-          onPressed: () {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          style: ElevatedButton.styleFrom(
-            primary: _selectedIndex == index ? Colors.blue : Colors.grey,
-          ),
-          child: Text(title),
-        );
-      }).toList(),
-    );
-  }
-}
-
-class DoctorList extends StatefulWidget {
-  const DoctorList({Key? key}) : super(key: key);
-
-  @override
-  _DoctorListState createState() => _DoctorListState();
-}
-
-class _DoctorListState extends State<DoctorList> {
-  int _selectedIndex = 0;
-  List<ListReceivedRequest> _items = [
-    ListReceivedRequest('אלון ווייסגור', 'רופא עור', 'שוהם', false),
-    ListReceivedRequest('יוסי', 'רופא שיניים', 'חולון', false),
-    ListReceivedRequest('מוטי', 'רופא מוח', 'תל אביב', false),
-  ];
-
-  void _incrementIndex() {
-    setState(() {
-      _selectedIndex = (_selectedIndex + 1) % _items.length;
-      getTurnsQueue();
-    });
-  }
-
-  ListReceivedRequest getDoctorTurn() {
-    return new ListReceivedRequest("אלון", "רופא", "יפו", false);
-  }
-
-  void getTurnsQueue() {
-    _items = [
-      ListReceivedRequest('אלון ווייסגור', 'רופא עור', 'שוהם', false),
-      ListReceivedRequest('יוסי', 'רופא שיניים', 'חולון', false),
-      ListReceivedRequest('מוטי', 'רופא מוח', 'תל אביב', false),
-    ];
-  }
-
-  void _decrementIndex() {
-    setState(() {
-      _selectedIndex = (_selectedIndex - 1 + _items.length) % _items.length;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        child: Row(
-      textDirection: TextDirection.rtl,
-      children: [
-        IconButton(
-          icon: SvgPicture.string(
-            _svg_wfqzrk,
-            allowDrawingOutsideViewBox: true,
-            fit: BoxFit.fill,
-          ),
-          onPressed: _decrementIndex,
-        ),
-        SvgPicture.string(
-          _svg_qcrh9k,
-          allowDrawingOutsideViewBox: true,
-          fit: BoxFit.fill,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Doctor(
-              _items[_selectedIndex].name,
-              _items[_selectedIndex].profession,
-              _items[_selectedIndex].location),
-        ),
-        Spacer(),
-        TextButton(
-            onPressed: () {},
-            child: Icon(calendar_today, size: 24, color: Colors.black)),
-        IconButton(
-          icon: SvgPicture.string(
-            _svg_ju4z8i,
-            allowDrawingOutsideViewBox: true,
-            fit: BoxFit.fill,
-          ),
-          onPressed: _incrementIndex,
-        ),
-      ],
-    ));
-  }
-}
-
-class DoctorCard extends StatelessWidget {
-  final int selectedIndex;
-  final List<Doctor> items;
-  final Function(int) onIndexChanged;
-
-  DoctorCard(
-      {required this.selectedIndex,
-      required this.items,
-      required this.onIndexChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        child: Row(
-      textDirection: TextDirection.rtl,
-      children: [
-        IconButton(
-          icon: SvgPicture.string(
-            _svg_wfqzrk,
-            allowDrawingOutsideViewBox: true,
-            fit: BoxFit.fill,
-          ),
-          onPressed: () {},
-        ),
-        SvgPicture.string(
-          _svg_qcrh9k,
-          allowDrawingOutsideViewBox: true,
-          fit: BoxFit.fill,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Doctor(items[selectedIndex].name,
-              items[selectedIndex].profession, items[selectedIndex].location),
-        ),
-        Spacer(),
-        TextButton(
-            onPressed: () {},
-            child: Icon(calendar_today, size: 24, color: Colors.black)),
-        IconButton(
-          icon: SvgPicture.string(
-            _svg_ju4z8i,
-            allowDrawingOutsideViewBox: true,
-            fit: BoxFit.fill,
-          ),
-          onPressed: () {},
-        ),
-      ],
-    ));
-  }
-}
 
 class Doctor extends StatelessWidget {
   final String name;
@@ -381,15 +223,16 @@ class MyWidget extends StatefulWidget {
 class _MyWidgetState extends State<MyWidget> {
   List<ListReceivedRequest> _selectedWidgetList = [];
   int _selectedIndex = 0;
-  int _selectedTurn = -1;
+
 
   List<bool> _selections = [];
 
   void _incrementIndex() {
+
     setState(() {
-      _selectedIndex = (_selectedIndex + 1) % myItems.length;
+      index = (index + 1) % myItems.length;
       _selectedTurn = -1;
-      _changeSelectedWidgetList(_selectedIndex);
+      showSpinner();
     });
   }
 
@@ -397,19 +240,12 @@ class _MyWidgetState extends State<MyWidget> {
     return new ListReceivedRequest("אלון", "רופא", "יפו", false);
   }
 
-  void getTurnsQueue() {
-    /*_items = [
-      ListReceivedRequest('אלון ווייסגור', 'רופא עור', 'שוהם', false),
-      ListReceivedRequest('יוסי', 'רופא שיניים', 'חולון', false),
-      ListReceivedRequest('מוטי', 'רופא מוח', 'תל אביב', false),
-    ];*/
-  }
 
   void _decrementIndex() {
     setState(() {
-      _selectedIndex = (_selectedIndex - 1 + myItems.length) % myItems.length;
+      index = (index - 1 + myItems.length) % myItems.length;
       _selectedTurn = -1;
-      _changeSelectedWidgetList(_selectedIndex);
+      showSpinner();
     });
   }
 
@@ -420,35 +256,7 @@ class _MyWidgetState extends State<MyWidget> {
     _selections = List.filled(_selectedWidgetList.length, false);
   }
 
-  void _changeSelectedWidgetList(int buttonIndex) {
-    setState(() {
-      switch (buttonIndex) {
-        case 0:
-          _selectedWidgetList = [
-            ListReceivedRequest('אלון', 'רופא עור', 'שוהם', false),
-            ListReceivedRequest('יוסי', 'רופא עור', 'יפו', false),
-            ListReceivedRequest('חן', 'רופא עור', 'חיפה', false),
-          ];
-          break;
-        case 1:
-          _selectedWidgetList = [
-            ListReceivedRequest('ולדימיר', 'רופא שיניים', 'עפולה', false),
-            ListReceivedRequest('ספיר', 'רופא שיניים', 'רמת דוד', false),
-            ListReceivedRequest('רון', 'רופא שיניים', 'נהריה', false),
-          ];
-          break;
-        case 2:
-          _selectedWidgetList = [
-            ListReceivedRequest('אביגדור', 'רופא מוח', 'תל אביב', false),
-            ListReceivedRequest('מוטי', 'רופא מוח', 'אילת', false),
-            ListReceivedRequest('רון', 'רופא מוח', 'דימונה', false),
-          ];
-          break;
-        default:
-          _selectedWidgetList = myItems;
-      }
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -473,9 +281,9 @@ class _MyWidgetState extends State<MyWidget> {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: Doctor(
-                myItems[_selectedIndex].name,
-                myItems[_selectedIndex].profession,
-                myItems[_selectedIndex].location),
+                myItems[index].name,
+                myItems[index].profession,
+                myItems[index].location),
           ),
           Spacer(),
           TextButton(
@@ -483,22 +291,22 @@ class _MyWidgetState extends State<MyWidget> {
               child: Icon(calendar_today, size: 24, color: Colors.black)),
           IconButton(
             icon: SvgPicture.string(
-              _svg_ju4z8i,
-              allowDrawingOutsideViewBox: true,
-              fit: BoxFit.fill,
-            ),
+                           _svg_ju4z8i,
+                           allowDrawingOutsideViewBox: true,
+                           fit: BoxFit.fill,
+                        ),
             onPressed: _incrementIndex,
           ),
         ],
       )),
       Expanded(
         child: ListView.builder(
-          itemCount: _selectedWidgetList.length,
+          itemCount: othersItems.length,
           itemBuilder: (context, index) {
             return Container(
               color: _selectedTurn == index ? Colors.blue : Colors.transparent,
               child: ListTile(
-                title: _selectedWidgetList[index],
+                title: othersItems[index],
                 selected: _selectedIndex == index,
                 onTap: () {
                   setState(() {
@@ -511,6 +319,34 @@ class _MyWidgetState extends State<MyWidget> {
         ),
       ),
     ]);
+  }
+  Future buildLists() async {
+    setState(() {
+      othersItems=[];
+    });
+    if(myItems.isEmpty) {
+      var turns = await db().getAppointments();
+      setState(() {
+        for (var docSnapshot in turns) {
+          myItems.add(ListReceivedRequest(
+              docSnapshot.data()["DoctorName"],
+              docSnapshot.data()["Profession"],
+              docSnapshot.data()["City"], false));
+        }
+      });
+    }
+    print(index);
+    var others=await db().getOthersAppointments(myItems[index].profession);
+    setState(() {
+      for (var docSnapshot in others) {
+        othersItems.add(ListReceivedRequest(
+            docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
+            docSnapshot.data()["City"],false));
+      }
+    });
+  }
+  void showSpinner() async{
+    await buildLists();
   }
 }
 
