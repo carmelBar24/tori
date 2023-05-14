@@ -14,7 +14,6 @@ import 'package:tori/Screens/future_turns_page.dart';
 
    final firestore = FirebaseFirestore.instance;
    var auth=FirebaseAuth.instance;
-   static var docID=0;
 
    Future checkIfUserExists(String id, String password) async {
      print(id);
@@ -77,7 +76,7 @@ import 'package:tori/Screens/future_turns_page.dart';
        "SenderDoctorName":senderDoctor,
        "ReceiverDoctorName":receiverDoctor
      };
-     await firestore.collection("Sent Requests").doc((docID++).toString()).set(swap);
+     await firestore.collection("Sent Requests").add(swap);
 
    }
    Future getUserDocumentId(String id) async {

@@ -6,7 +6,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tori/Widgets/menu.dart';
 import '../database/firebase_functions_db.dart' ;
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:alert/alert.dart';
 
 
 IconData calendar_today = IconData(0xe122, fontFamily: 'MaterialIcons');
@@ -23,6 +25,7 @@ List<ListReceivedRequest> myItems = [];
 List<ListReceivedRequest> othersItems = [];
 int index=0;
 int _selectedTurn = -1;
+var userToken=FirebaseAuth.instance.currentUser?.uid;
 
 class SwapPage extends StatefulWidget {
   const SwapPage({Key? key}) : super(key: key);
@@ -35,7 +38,7 @@ class _SwapPageState extends State<SwapPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     showSpinner();
   }
   @override
@@ -117,7 +120,7 @@ class _SwapPageState extends State<SwapPage> {
             ),
             TextButton(
               onPressed: ()  async{
-
+                await db().swapTurns(userToken, othersItems[_selectedTurn].id, myItems[index].profession, myItems[index].location, othersItems[_selectedTurn].location, myItems[index].name, othersItems[_selectedTurn].name).whenComplete(() => Alert(message: 'הבקשה נשלחה בהצלחה').show());
               },
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -165,7 +168,7 @@ class _SwapPageState extends State<SwapPage> {
           myItems.add(ListReceivedRequest(
               docSnapshot.data()["DoctorName"],
               docSnapshot.data()["Profession"],
-              docSnapshot.data()["City"], false));
+              docSnapshot.data()["City"],docSnapshot.data()["Id"] ,false));
         }
       });
     }
@@ -174,7 +177,7 @@ class _SwapPageState extends State<SwapPage> {
       for (var docSnapshot in others) {
         othersItems.add(ListReceivedRequest(
             docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
-            docSnapshot.data()["City"],false));
+            docSnapshot.data()["City"],docSnapshot.data()["Id"],false));
       }
     });
   }
@@ -236,9 +239,6 @@ class _MyWidgetState extends State<MyWidget> {
     });
   }
 
-  ListReceivedRequest getDoctorTurn() {
-    return new ListReceivedRequest("אלון", "רופא", "יפו", false);
-  }
 
 
   void _decrementIndex() {
@@ -331,7 +331,7 @@ class _MyWidgetState extends State<MyWidget> {
           myItems.add(ListReceivedRequest(
               docSnapshot.data()["DoctorName"],
               docSnapshot.data()["Profession"],
-              docSnapshot.data()["City"], false));
+              docSnapshot.data()["City"],docSnapshot.data()["Id"],false));
         }
       });
     }
@@ -341,7 +341,7 @@ class _MyWidgetState extends State<MyWidget> {
       for (var docSnapshot in others) {
         othersItems.add(ListReceivedRequest(
             docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
-            docSnapshot.data()["City"],false));
+            docSnapshot.data()["City"],docSnapshot.data()["Id"],false));
       }
     });
   }
@@ -352,12 +352,13 @@ class _MyWidgetState extends State<MyWidget> {
 
 class ListReceivedRequest extends StatelessWidget {
   final String name;
+  final String id;
   final String profession;
   final String location;
   final bool isSelected;
 
   const ListReceivedRequest(
-      this.name, this.profession, this.location, this.isSelected);
+      this.name, this.profession, this.location,this.id, this.isSelected);
 
   @override
   Widget build(BuildContext context) {
