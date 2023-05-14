@@ -14,6 +14,7 @@ import 'package:tori/Screens/future_turns_page.dart';
    final firestore = FirebaseFirestore.instance;
    var auth=FirebaseAuth.instance;
 
+
    Future checkIfUserExists(String id, String password) async {
      print(id);
      print(password);
@@ -53,6 +54,16 @@ import 'package:tori/Screens/future_turns_page.dart';
        return docRef.docs;
    }
 
+   Future getOthersAppointments(profession) async
+   {
+     final user=auth.currentUser?.uid;
+     final docRef = await firestore.collection("Future Queues").where("Id",isNotEqualTo: user).where("Profession",isEqualTo: profession).get();
+     print("Successfully completed");
+     for (var docSnapshot in docRef.docs) {
+       print('${docSnapshot.id} => ${docSnapshot.data()}');
+     }
+     return docRef.docs;
+   }
 
    Future getUserDocumentId(String id) async {
      final docRef = await firestore.collection("Users").where(

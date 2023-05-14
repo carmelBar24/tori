@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tori/Widgets/menu.dart';
+import '../database/firebase_functions_db.dart' ;
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+
 
 IconData calendar_today = IconData(0xe122, fontFamily: 'MaterialIcons');
 const String _svg_qcrh9k =
@@ -16,15 +19,28 @@ const String _svg_aji50p =
 const String _svg_kx5wvb =
     '<svg viewBox="53.5 258.0 320.0 74.0" ><path transform="translate(53.5, 258.0)" d="M 8 0 L 312 0 C 316.4182739257812 0 320 3.581721782684326 320 8 L 320 66 C 320 70.41828155517578 316.4182739257812 74 312 74 L 8 74 C 3.581721782684326 74 0 70.41828155517578 0 66 L 0 8 C 0 3.581721782684326 3.581721782684326 0 8 0 Z" fill="#ffffff" fill-opacity="0.85" stroke="none" stroke-width="1" stroke-opacity="0.85" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 
-class SwapPage extends StatelessWidget {
-  const SwapPage({
-    Key? key,
-  }) : super(key: key);
+List<ListReceivedRequest> myItems = [];
+List<ListReceivedRequest> othersItems = [];
+
+class SwapPage extends StatefulWidget {
+  const SwapPage({Key? key}) : super(key: key);
+
+  @override
+  State<SwapPage> createState() => _SwapPageState();
+}
+
+class _SwapPageState extends State<SwapPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    showSpinner();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-          const Color(0xfff4f5f3), // Set the background color to black
+      const Color(0xfff4f5f3), // Set the background color to black
       body: SafeArea(
         child: Column(
           children: [
@@ -72,7 +88,15 @@ class SwapPage extends StatelessWidget {
               "התור הנבחר להחלפה",
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            Expanded(flex: 2, child: MyWidget()),
+            Expanded(flex: 2, child: myItems.isEmpty ? Container(
+                color: Color(0xfff4f5f3),
+                child: SleekCircularSlider(
+                    appearance: CircularSliderAppearance(
+                      spinnerMode: true,
+                      customColors: CustomSliderColors(trackColor: Colors.white,
+                          progressBarColor: Colors.lightBlue),
+                    )))
+                : MyWidget()),
             SizedBox(
               height: 30.0,
             ),
@@ -89,21 +113,29 @@ class SwapPage extends StatelessWidget {
                 ],
               ),
             ),
-            Text(
-              'בקשש החלפה',
-              style: TextStyle(
-                fontFamily: 'Noto Sans Hebrew',
-                fontSize: 25,
-                color: const Color(0xffffffff),
-                shadows: [
-                  Shadow(
-                    color: const Color(0x29000000),
-                    offset: Offset(5, 3),
-                    blurRadius: 6,
-                  )
-                ],
+            TextButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
+                  backgroundColor: MaterialStateProperty.all(Colors.blue)
               ),
-              textAlign: TextAlign.center,
+              child: Text(
+                'בקש החלפה',
+                style: TextStyle(
+                  fontFamily: 'Noto Sans Hebrew',
+                  fontSize: 25,
+                  color: const Color(0xffffffff),
+                  shadows: [
+                    Shadow(
+                      color: const Color(0x29000000),
+                      offset: Offset(5, 3),
+                      blurRadius: 6,
+                    )
+                  ],
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
             Flexible(
               child: menu(
@@ -117,7 +149,32 @@ class SwapPage extends StatelessWidget {
       ),
     );
   }
+
+  Future buildLists() async {
+    var turns = await db().getAppointments();
+    setState(() {
+      for (var docSnapshot in turns) {
+        myItems.add(ListReceivedRequest(
+            docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
+            docSnapshot.data()["City"],false));
+      }
+    });
+   /* var others= await myDB.;
+    setState(() {
+      for (var docSnapshot in turns) {
+        myItems.add(ListReceivedRequest(
+            docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
+            docSnapshot.data()["City"],false));
+      }
+    });*/
+    print(myItems.length);
+  }
+  void showSpinner() async{
+    await buildLists();
+  }
 }
+
+
 
 const String _svg_wfqzrk =
     '<svg viewBox="357.0 287.6 13.0 14.9" ><path transform="matrix(0.0, 1.0, -1.0, 0.0, 370.0, 287.57)" d="M 7.430877685546875 0 L 14.86175537109375 13.00403594970703 L 0 13.00403594970703 L 7.430877685546875 0 Z" fill="#6e6f6f" stroke="#707070" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
@@ -323,21 +380,14 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   List<ListReceivedRequest> _selectedWidgetList = [];
-
   int _selectedIndex = 0;
   int _selectedTurn = -1;
 
   List<bool> _selections = [];
 
-  List<ListReceivedRequest> _items = [
-    ListReceivedRequest('אלון ווייסגור', 'רופא עור', 'שוהם', false),
-    ListReceivedRequest('יוסי', 'רופא שיניים', 'חולון', false),
-    ListReceivedRequest('מוטי', 'רופא מוח', 'תל אביב', false),
-  ];
-
   void _incrementIndex() {
     setState(() {
-      _selectedIndex = (_selectedIndex + 1) % _items.length;
+      _selectedIndex = (_selectedIndex + 1) % myItems.length;
       _selectedTurn = -1;
       _changeSelectedWidgetList(_selectedIndex);
     });
@@ -348,16 +398,16 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   void getTurnsQueue() {
-    _items = [
+    /*_items = [
       ListReceivedRequest('אלון ווייסגור', 'רופא עור', 'שוהם', false),
       ListReceivedRequest('יוסי', 'רופא שיניים', 'חולון', false),
       ListReceivedRequest('מוטי', 'רופא מוח', 'תל אביב', false),
-    ];
+    ];*/
   }
 
   void _decrementIndex() {
     setState(() {
-      _selectedIndex = (_selectedIndex - 1 + _items.length) % _items.length;
+      _selectedIndex = (_selectedIndex - 1 + myItems.length) % myItems.length;
       _selectedTurn = -1;
       _changeSelectedWidgetList(_selectedIndex);
     });
@@ -366,7 +416,7 @@ class _MyWidgetState extends State<MyWidget> {
   @override
   void initState() {
     super.initState();
-    _selectedWidgetList = _items; // initialize selected list with default
+    _selectedWidgetList = myItems; // initialize selected list with default
     _selections = List.filled(_selectedWidgetList.length, false);
   }
 
@@ -395,7 +445,7 @@ class _MyWidgetState extends State<MyWidget> {
           ];
           break;
         default:
-          _selectedWidgetList = _items;
+          _selectedWidgetList = myItems;
       }
     });
   }
@@ -423,9 +473,9 @@ class _MyWidgetState extends State<MyWidget> {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: Doctor(
-                _items[_selectedIndex].name,
-                _items[_selectedIndex].profession,
-                _items[_selectedIndex].location),
+                myItems[_selectedIndex].name,
+                myItems[_selectedIndex].profession,
+                myItems[_selectedIndex].location),
           ),
           Spacer(),
           TextButton(
