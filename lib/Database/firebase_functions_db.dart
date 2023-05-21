@@ -71,6 +71,23 @@ class db {
     return docRef.docs;
   }
 
+  Future getRequests(docName, docCity, docProf, docDate) async {
+    final user = auth.currentUser?.uid;
+    print(user);
+    final docRef = await firestore
+        .collection("Sent Requests")
+        .where("ReceiverDoctorName", isEqualTo: docName)
+        .where("ReceiverCity", isEqualTo: docCity)
+        .where("Profession", isEqualTo: docProf)
+        .where("ReceiverDate", isEqualTo: docDate)
+        .get();
+    print("Successfully completed");
+    for (var docSnapshot in docRef.docs) {
+      print('${docSnapshot.id} => ${docSnapshot.data()}');
+    }
+    return docRef.docs;
+  }
+
   Future updatePublishTurn(id) async {
     await firestore
         .collection("Future Queues")
@@ -93,8 +110,16 @@ class db {
     return docRef.docs;
   }
 
-  Future swapTurns(senderToken, receiverToken, profession, senderCity,
-      receiverCity, senderDoctor, receiverDoctor) async {
+  Future swapTurns(
+      senderToken,
+      receiverToken,
+      profession,
+      senderCity,
+      receiverCity,
+      senderDoctor,
+      receiverDoctor,
+      senderDate,
+      receiverDate) async {
     final swap = <String, String>{
       "SenderToken": senderToken,
       "ReceiverToken": receiverToken,
@@ -102,7 +127,9 @@ class db {
       "SenderCity": senderCity,
       "ReceiverCity": receiverCity,
       "SenderDoctorName": senderDoctor,
-      "ReceiverDoctorName": receiverDoctor
+      "ReceiverDoctorName": receiverDoctor,
+      "SenderDate": senderDate,
+      "ReceiverDate": receiverDate
     };
     await firestore.collection("Sent Requests").add(swap);
   }

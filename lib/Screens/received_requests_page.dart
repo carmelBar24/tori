@@ -10,6 +10,7 @@ import 'package:alert/alert.dart';
 
 IconData calendar_today = IconData(0xe122, fontFamily: 'MaterialIcons');
 List<ListReceivedRequest> myItems = [];
+List<ListReceivedRequest> tempItems = [];
 List<ListReceivedRequest> othersItems = [];
 int index = 0;
 var userToken = FirebaseAuth.instance.currentUser?.uid;
@@ -37,28 +38,43 @@ class _ReceivedRequestsPageState extends State<ReceivedRequestsPage> {
   }
 
   Future buildLists() async {
-    var turns = await db().getAppointments();
     setState(() {
-      int listIndex = 0;
-      for (var docSnapshot in turns) {
-        myItems.add(ListReceivedRequest(
-            listIndex++,
-            docSnapshot.data()["DoctorName"],
-            docSnapshot.data()["Profession"],
-            docSnapshot.data()["City"],
-            docSnapshot.data()["Id"],
-            docSnapshot.data()["Date"]));
-      }
+      tempItems = [];
     });
-    /* var others= await myDB.;
+    if (tempItems.isEmpty) {
+      var turns = await db().getSomething();
+      setState(() {
+        int listIndex = 0;
+        for (var docSnapshot in turns) {
+          tempItems.add(ListReceivedRequest(
+              listIndex++,
+              docSnapshot.data()["DoctorName"],
+              docSnapshot.data()["Profession"],
+              docSnapshot.data()["City"],
+              docSnapshot.data()["Date"]));
+        }
+        myItems = tempItems;
+      });
+    }
+    var others = await db().getRequests(
+        myItems[index].name,
+        myItems[index].location,
+        myItems[index].profession,
+        myItems[index].date);
+    print(others);
     setState(() {
-      for (var docSnapshot in turns) {
-        myItems.add(ListReceivedRequest(
-            docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
-            docSnapshot.data()["City"],false));
+      tempItems = [];
+      int listIndex = 0;
+      for (var docSnapshot in others) {
+        tempItems.add(ListReceivedRequest(
+            listIndex++,
+            docSnapshot.data()["SenderDoctorName"],
+            docSnapshot.data()["Profession"],
+            docSnapshot.data()["SenderCity"],
+            docSnapshot.data()["SenderDate"]));
       }
-    });*/
-    print(myItems.length);
+      othersItems = tempItems;
+    });
   }
 
   void showSpinner() async {
@@ -181,7 +197,7 @@ class _DoctorListState extends State<DoctorList> {
       othersItems = [];
     });
     if (myItems.isEmpty) {
-      var turns = await db().getAppointments();
+      var turns = await db().getSomething();
       setState(() {
         int listIndex = 0;
         for (var docSnapshot in turns) {
@@ -190,24 +206,32 @@ class _DoctorListState extends State<DoctorList> {
               docSnapshot.data()["DoctorName"],
               docSnapshot.data()["Profession"],
               docSnapshot.data()["City"],
-              docSnapshot.data()["Id"],
               docSnapshot.data()["Date"]));
         }
       });
     }
-    print(index);
-    var others = await db().getOthersAppointments(myItems[index].profession);
     setState(() {
+      tempItems = [];
+    });
+    print(index);
+    var others = await db().getRequests(
+        myItems[index].name,
+        myItems[index].location,
+        myItems[index].profession,
+        myItems[index].date);
+    print("others" + others);
+
+    setState(() {
+      int listIndex = 0;
       for (var docSnapshot in others) {
-        int listIndex = 0;
-        othersItems.add(ListReceivedRequest(
+        tempItems.add(ListReceivedRequest(
             listIndex++,
-            docSnapshot.data()["DoctorName"],
+            docSnapshot.data()["SenderDoctorName"],
             docSnapshot.data()["Profession"],
-            docSnapshot.data()["City"],
-            docSnapshot.data()["Id"],
-            docSnapshot.data()["Date"]));
+            docSnapshot.data()["SenderCity"],
+            docSnapshot.data()["SenderDate"]));
       }
+      othersItems = tempItems;
     });
   }
 
@@ -313,6 +337,7 @@ class _MyWidgetState extends State<MyWidget> {
     super.initState();
     _selectedWidgetList = myItems; // initialize selected list with default
     _selections = List.filled(_selectedWidgetList.length, false);
+    buildLists();
   }
 
   @override
@@ -371,36 +396,41 @@ class _MyWidgetState extends State<MyWidget> {
 
   Future buildLists() async {
     setState(() {
-      othersItems = [];
+      tempItems = [];
     });
-    if (myItems.isEmpty) {
-      var turns = await db().getAppointments();
+    if (tempItems.isEmpty) {
+      var turns = await db().getSomething();
       setState(() {
         int listIndex = 0;
         for (var docSnapshot in turns) {
-          myItems.add(ListReceivedRequest(
+          tempItems.add(ListReceivedRequest(
               listIndex++,
               docSnapshot.data()["DoctorName"],
               docSnapshot.data()["Profession"],
               docSnapshot.data()["City"],
-              docSnapshot.data()["Id"],
               docSnapshot.data()["Date"]));
         }
+        myItems = tempItems;
       });
     }
-    print(index);
-    var others = await db().getOthersAppointments(myItems[index].profession);
+    var others = await db().getRequests(
+        myItems[index].name,
+        myItems[index].location,
+        myItems[index].profession,
+        myItems[index].date);
+    print(others);
     setState(() {
+      tempItems = [];
       int listIndex = 0;
       for (var docSnapshot in others) {
-        othersItems.add(ListReceivedRequest(
+        tempItems.add(ListReceivedRequest(
             listIndex++,
-            docSnapshot.data()["DoctorName"],
+            docSnapshot.data()["SenderDoctorName"],
             docSnapshot.data()["Profession"],
-            docSnapshot.data()["City"],
-            docSnapshot.data()["Id"],
-            docSnapshot.data()["Date"]));
+            docSnapshot.data()["SenderCity"],
+            docSnapshot.data()["SenderDate"]));
       }
+      othersItems = tempItems;
     });
   }
 
@@ -412,13 +442,12 @@ class _MyWidgetState extends State<MyWidget> {
 class ListReceivedRequest extends StatelessWidget {
   final int listIndex;
   final String name;
-  final String id;
   final String profession;
   final String location;
   final String date;
 
-  const ListReceivedRequest(this.listIndex, this.name, this.profession,
-      this.location, this.id, this.date);
+  const ListReceivedRequest(
+      this.listIndex, this.name, this.profession, this.location, this.date);
 
   @override
   Widget build(BuildContext context) {

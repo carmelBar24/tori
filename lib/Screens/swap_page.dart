@@ -131,7 +131,9 @@ class _SwapPageState extends State<SwapPage> {
                         myItems[index].location,
                         othersItems[_selectedTurn].location,
                         myItems[index].name,
-                        othersItems[_selectedTurn].name)
+                        othersItems[_selectedTurn].name,
+                        myItems[index].date,
+                        othersItems[_selectedTurn].date)
                     .whenComplete(
                         () => Alert(message: 'הבקשה נשלחה בהצלחה').show());
               },
