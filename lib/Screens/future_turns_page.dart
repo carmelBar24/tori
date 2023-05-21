@@ -3,9 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter/material.dart';
 import '../Widgets/menu.dart';
+import 'package:alert/alert.dart';
 
-import '../database/firebase_functions_db.dart' ;
+import '../database/firebase_functions_db.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+
+List<Widget> nodes = [];
 
 IconData calendar_today = IconData(0xe122, fontFamily: 'MaterialIcons');
 const String _svg_qcrh9k =
@@ -15,21 +18,58 @@ const String _svg_yum =
 const String _svg_etkibk =
     '<svg viewBox="0.0 0.0 16.6 18.0" ><path transform="translate(0.0, 0.0)" d="M 2.023783922195435 18.01796722412109 L 0.1097409725189209 18.01796722412109 C -0.7599968314170837 12.56161785125732 3.555121898651123 4.135731220245361 13.02290344238281 3.461907625198364 C 12.24974632263184 2.813908338546753 11.54458999633789 2.223065137863159 10.78537750244141 1.586600065231323 C 11.51170825958252 0.9360182881355286 11.97567176818848 0.5204310417175293 12.5565299987793 0 C 13.93774604797363 1.542183637619019 15.34995269775391 3.118798494338989 16.58827781677246 4.501392364501953 C 15.38214588165283 5.851621150970459 13.97217750549316 7.430473804473877 12.55033302307129 9.022411346435547 C 11.96396446228027 8.453775405883789 11.51773357391357 8.021144866943359 10.99110507965088 7.510354995727539 C 11.66389560699463 6.901780128479004 12.31482124328613 6.313174724578857 12.96557521820068 5.724740982055664 C 9.65998649597168 5.741612911224365 7.004289627075195 7.056548595428467 4.888134479522705 9.436620712280273 C 2.749770641326904 11.84182929992676 1.837165594100952 14.70342350006104 2.023783922195435 18.01796722412109" fill="#f4f5f3" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 
+class BooleanButton extends StatefulWidget {
+  @override
+  _BooleanButtonState createState() => _BooleanButtonState();
+}
+
+class _BooleanButtonState extends State<BooleanButton> {
+  bool requestedTurn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // requestedTurn -- from DB
+  }
+
+  void toggleButtonState() {
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pushNamed(context, 'swapPage');
+      },
+      child: Text(requestedTurn ? "פרסם תור" : 'התור נשלח',
+          style: TextStyle(color: Colors.white)),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Color(0xff418fe7)),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class FutureTurnsPage extends StatefulWidget {
-   FutureTurnsPage({Key? key}) : super(key: key);
+  FutureTurnsPage({Key? key}) : super(key: key);
 
   @override
   State<FutureTurnsPage> createState() => _FutureTurnsPageState();
 }
 
 class _FutureTurnsPageState extends State<FutureTurnsPage> {
-  late bool isFinish=false;
-  List<Widget> nodes=[];
+  late bool isFinish = false;
   @override
-  void initState(){
+  void initState() {
     showSpinner();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +77,16 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 10.0,),
-            Expanded(child: Container(height: 180.0,
-                width: 180.0,
-                child: Image(
-                    image: AssetImage("images/logo.png"), fit: BoxFit.cover))),
+            SizedBox(
+              height: 10.0,
+            ),
+            Expanded(
+                child: Container(
+                    height: 180.0,
+                    width: 180.0,
+                    child: Image(
+                        image: AssetImage("images/logo.png"),
+                        fit: BoxFit.cover))),
             Container(
               margin: EdgeInsets.all(20.0),
               height: 50.0,
@@ -75,37 +120,46 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
                 textAlign: TextAlign.center,
               ),
             ),
-            Text("שלום גל",
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
-            Text("תורים עתידיים 3",
+            Text(
+              "שלום שי",
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+            ),
+            Text("תורים עתידיים 2",
                 style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold)),
             Expanded(
               flex: 2,
               child: Container(
                 margin: EdgeInsets.only(top: 10.0),
                 color: Colors.white,
-                child: nodes.isEmpty?Container(
-                  color:Color(0xfff4f5f3),
-                  child: SleekCircularSlider(
-              appearance: CircularSliderAppearance(
-              spinnerMode: true,
-                customColors: CustomSliderColors(trackColor: Colors.white,progressBarColor: Colors.lightBlue),
-              )))
-                    :Scrollbar(
-                  thickness: 10,
-                  isAlwaysShown: true,
-                  child: ListView(
-
-                    children: nodes,
-                  ),
-                ),
+                child: nodes.isEmpty
+                    ? Container(
+                        color: Color(0xfff4f5f3),
+                        child: SleekCircularSlider(
+                            appearance: CircularSliderAppearance(
+                          spinnerMode: true,
+                          customColors: CustomSliderColors(
+                              trackColor: Colors.white,
+                              progressBarColor: Colors.lightBlue),
+                        )))
+                    : Scrollbar(
+                        thickness: 10,
+                        isAlwaysShown: true,
+                        child: ListView(
+                          children: nodes,
+                        ),
+                      ),
               ),
             ),
-            SizedBox(height: 120.0,),
-            Flexible(
-              child: menu(home: "images/unpress-home.png",contact: "images/unpress-contact.png",month:"images/unpress-month.png",num: 1),
+            SizedBox(
+              height: 120.0,
             ),
-
+            Flexible(
+              child: menu(
+                  home: "images/unpress-home.png",
+                  contact: "images/unpress-contact.png",
+                  month: "images/unpress-month.png",
+                  num: 1),
+            ),
           ],
         ),
       ),
@@ -115,29 +169,43 @@ class _FutureTurnsPageState extends State<FutureTurnsPage> {
   Future buildLists() async {
     var turns = await db().getAppointments();
     setState(() {
+      nodes = [];
       for (var docSnapshot in turns) {
-        nodes.add(ListNode(docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],docSnapshot.data()["City"]));
+        nodes.add(ListNode(
+            docSnapshot.data()["DoctorName"],
+            docSnapshot.data()["Profession"],
+            docSnapshot.data()["City"],
+            docSnapshot.data()["IsPublished"],
+            docSnapshot.data()["Date"],
+            docSnapshot.id));
       }
     });
     print(nodes.length);
   }
 
-
-  void showSpinner() async{
-     await buildLists();
+  void showSpinner() async {
+    await buildLists();
   }
 }
 
 class ListNode extends StatelessWidget {
-  ListNode(String user_name,String user_pro,String user_loc)
-  {
-    name=user_name;
-    profession=user_pro;
-    loc=user_loc;
+  ListNode(String user_name, String user_pro, String user_loc, bool isPublished,
+      String date, String id) {
+    name = user_name;
+    profession = user_pro;
+    loc = user_loc;
+    this.isPublished = isPublished;
+    this.date = date;
+    this.id = id;
   }
-  String ?name;
-  String ?profession;
-  String ?loc;
+
+  String? name;
+  String? profession;
+  String? loc;
+  String? date;
+  String? id;
+  bool? isPublished;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -145,27 +213,45 @@ class ListNode extends StatelessWidget {
         leading: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextButton(onPressed: (){}, child: Text("בקש החלפה",style: TextStyle(color: Colors.white)), style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Color(0xff418fe7)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+            TextButton(
+              onPressed: () async {
+                if (!isPublished!) {
+                  await db().updatePublishTurn(id!);
+                  Navigator.pushNamed(context, 'swapPage');
+                }
+              },
+              child: Text(isPublished! ? "התור פורסם" : 'פרסם תור',
+                  style: TextStyle(color: Colors.white)),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(isPublished!
+                    ? Color.fromARGB(255, 97, 166, 97)
+                    : Color(0xff418fe7)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
                 ),
               ),
             ),
-            ),
-            TextButton(onPressed: (){}, child:Icon(calendar_today, size: 24,
-                color: Colors.black)),
+            Column(children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(date!),
+              ),
+              Icon(calendar_today, size: 24, color: Colors.black),
+            ])
           ],
         ),
-        trailing:SvgPicture.string(
+        trailing: SvgPicture.string(
           _svg_qcrh9k,
           allowDrawingOutsideViewBox: true,
           fit: BoxFit.fill,
         ),
-        title: Text(name!,textAlign: TextAlign.right,),
-        subtitle:
-        Text(textAlign: TextAlign.right,profession!+'\n'+loc!),
+        title: Text(
+          name!,
+          textAlign: TextAlign.right,
+        ),
+        subtitle: Text(textAlign: TextAlign.right, profession! + '\n' + loc!),
         isThreeLine: true,
       ),
     );

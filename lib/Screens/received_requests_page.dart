@@ -46,7 +46,8 @@ class _ReceivedRequestsPageState extends State<ReceivedRequestsPage> {
             docSnapshot.data()["DoctorName"],
             docSnapshot.data()["Profession"],
             docSnapshot.data()["City"],
-            docSnapshot.data()["Id"]));
+            docSnapshot.data()["Id"],
+            docSnapshot.data()["Date"]));
       }
     });
     /* var others= await myDB.;
@@ -189,7 +190,8 @@ class _DoctorListState extends State<DoctorList> {
               docSnapshot.data()["DoctorName"],
               docSnapshot.data()["Profession"],
               docSnapshot.data()["City"],
-              docSnapshot.data()["Id"]));
+              docSnapshot.data()["Id"],
+              docSnapshot.data()["Date"]));
         }
       });
     }
@@ -203,7 +205,8 @@ class _DoctorListState extends State<DoctorList> {
             docSnapshot.data()["DoctorName"],
             docSnapshot.data()["Profession"],
             docSnapshot.data()["City"],
-            docSnapshot.data()["Id"]));
+            docSnapshot.data()["Id"],
+            docSnapshot.data()["Date"]));
       }
     });
   }
@@ -239,9 +242,13 @@ class _DoctorListState extends State<DoctorList> {
               myItems[_selectedIndex].location),
         ),
         Spacer(),
-        TextButton(
-            onPressed: () {},
-            child: Icon(calendar_today, size: 24, color: Colors.black)),
+        Column(children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(myItems[_selectedIndex].date),
+          ),
+          Icon(calendar_today, size: 24, color: Colors.black),
+        ]),
         IconButton(
           icon: SvgPicture.string(
             _svg_ju4z8i,
@@ -334,9 +341,13 @@ class _MyWidgetState extends State<MyWidget> {
                 myItems[index].location),
           ),
           Spacer(),
-          TextButton(
-              onPressed: () {},
-              child: Icon(calendar_today, size: 24, color: Colors.black)),
+          Column(children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(myItems[_selectedIndex].date),
+            ),
+            Icon(calendar_today, size: 24, color: Colors.black),
+          ]),
           IconButton(
             icon: SvgPicture.string(
               _svg_ju4z8i,
@@ -372,7 +383,8 @@ class _MyWidgetState extends State<MyWidget> {
               docSnapshot.data()["DoctorName"],
               docSnapshot.data()["Profession"],
               docSnapshot.data()["City"],
-              docSnapshot.data()["Id"]));
+              docSnapshot.data()["Id"],
+              docSnapshot.data()["Date"]));
         }
       });
     }
@@ -386,7 +398,8 @@ class _MyWidgetState extends State<MyWidget> {
             docSnapshot.data()["DoctorName"],
             docSnapshot.data()["Profession"],
             docSnapshot.data()["City"],
-            docSnapshot.data()["Id"]));
+            docSnapshot.data()["Id"],
+            docSnapshot.data()["Date"]));
       }
     });
   }
@@ -402,9 +415,10 @@ class ListReceivedRequest extends StatelessWidget {
   final String id;
   final String profession;
   final String location;
+  final String date;
 
-  const ListReceivedRequest(
-      this.listIndex, this.name, this.profession, this.location, this.id);
+  const ListReceivedRequest(this.listIndex, this.name, this.profession,
+      this.location, this.id, this.date);
 
   @override
   Widget build(BuildContext context) {
@@ -415,12 +429,11 @@ class ListReceivedRequest extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Alert(
-                  message: "ההחלפה בוצעה בהצלחה"
+                Alert(message: "ההחלפה בוצעה בהצלחה"
                         // message: myItems[index].name +
-                            // " מחליף עם " +
-                            // othersItems[listIndex].name
-                            )
+                        // " מחליף עם " +
+                        // othersItems[listIndex].name
+                        )
                     .show();
               },
               child: Text("אישור", style: TextStyle(color: Colors.white)),
@@ -449,9 +462,13 @@ class ListReceivedRequest extends StatelessWidget {
                 ),
               ),
             ),
-            TextButton(
-                onPressed: () {},
-                child: Icon(calendar_today, size: 24, color: Colors.black)),
+            Column(children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(date),
+              ),
+              Icon(calendar_today, size: 24, color: Colors.black),
+            ])
           ],
         ),
         trailing: SvgPicture.string(

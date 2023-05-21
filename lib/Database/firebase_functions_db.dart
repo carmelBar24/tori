@@ -56,6 +56,29 @@ class db {
     return docRef.docs;
   }
 
+  Future getSomething() async {
+    final user = auth.currentUser?.uid;
+    print(user);
+    final docRef = await firestore
+        .collection("Future Queues")
+        .where("Id", isEqualTo: user)
+        .where("IsPublished", isEqualTo: true)
+        .get();
+    print("Successfully completed");
+    for (var docSnapshot in docRef.docs) {
+      print('${docSnapshot.id} => ${docSnapshot.data()}');
+    }
+    return docRef.docs;
+  }
+
+  Future updatePublishTurn(id) async {
+    await firestore
+        .collection("Future Queues")
+        .doc(id)
+        .update({'IsPublished': true});
+    print("Successfully completed");
+  }
+
   Future getOthersAppointments(profession) async {
     final user = auth.currentUser?.uid;
     final docRef = await firestore
@@ -72,24 +95,6 @@ class db {
 
   Future swapTurns(senderToken, receiverToken, profession, senderCity,
       receiverCity, senderDoctor, receiverDoctor) async {
-    final swap = <String, String>{
-      "SenderToken": senderToken,
-      "ReceiverToken": receiverToken,
-      "Profession": profession,
-      "SenderCity": senderCity,
-      "ReceiverCity": receiverCity,
-      "SenderDoctorName": senderDoctor,
-      "ReceiverDoctorName": receiverDoctor
-    };
-    await firestore.collection("Sent Requests").add(swap);
-  }
-
-  Future acceptSwap(senderToken, receiverToken, profession, senderCity,
-      receiverCity, senderDoctor, receiverDoctor) async {
-    final docRef = await firestore
-        .collection("Meetings")
-        .where("Patient", isEqualTo: senderToken)
-        .get();
     final swap = <String, String>{
       "SenderToken": senderToken,
       "ReceiverToken": receiverToken,

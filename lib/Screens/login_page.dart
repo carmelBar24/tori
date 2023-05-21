@@ -6,21 +6,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tori/Screens/future_turns_page.dart';
 
-
 class LoginPage extends StatefulWidget {
-
   LoginPage({Key? key}) : super(key: key);
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String email="";
-  String password="";
-  db database=db();
-  String text="";
-  bool result=false;
-  var _auth=FirebaseAuth.instance;
+  String email = "";
+  String password = "";
+  db database = db();
+  String text = "";
+  bool result = false;
+  var _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +27,16 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 10.0,),
-            Expanded(child: Container(height: 180.0,width: 180.0,child: Image(image: AssetImage("images/logo.png"),fit: BoxFit.cover))),
+            SizedBox(
+              height: 10.0,
+            ),
+            Expanded(
+                child: Container(
+                    height: 180.0,
+                    width: 180.0,
+                    child: Image(
+                        image: AssetImage("images/logo.png"),
+                        fit: BoxFit.cover))),
             Container(
               margin: EdgeInsets.all(20.0),
               height: 50.0,
@@ -46,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-              child:Text(
+              child: Text(
                 'התחברות דרך קופ״ח',
                 style: TextStyle(
                   fontFamily: 'Noto Sans Hebrew',
@@ -85,27 +91,24 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
-                          'אימייל',
+                      Text('אימייל',
                           style: TextStyle(
                             fontFamily: 'Noto Sans Hebrew',
                             fontSize: 20,
                             color: const Color(0xff0a1038),
                           ),
-                          textAlign: TextAlign.right
-                      ),
+                          textAlign: TextAlign.right),
                       Container(
-                        decoration:BoxDecoration(boxShadow: [
+                        decoration: BoxDecoration(boxShadow: [
                           BoxShadow(
                             color: const Color(0x29000000),
                             offset: Offset(5, 3),
                             blurRadius: 6,
                           ),
-                        ], color: const Color(0xffffffff)
-                        ),
+                        ], color: const Color(0xffffffff)),
                         child: TextField(
-                          onChanged: (id_user){
-                            email=id_user;
+                          onChanged: (id_user) {
+                            email = "shays433@gmail.com";
                           },
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -128,21 +131,20 @@ class _LoginPageState extends State<LoginPage> {
                         textAlign: TextAlign.right,
                       ),
                       Container(
-                        decoration:BoxDecoration(boxShadow: [
+                        decoration: BoxDecoration(boxShadow: [
                           BoxShadow(
                             color: const Color(0x29000000),
                             offset: Offset(5, 3),
                             blurRadius: 6,
                           ),
-                        ], color: const Color(0xffffffff)
-                        ),
+                        ], color: const Color(0xffffffff)),
                         child: TextField(
                           obscureText: true,
-                          onChanged: (pass){
-                            password=pass;
+                          onChanged: (pass) {
+                            password = "123456";
                           },
                           decoration: InputDecoration(
-                            errorText: result?text:null,
+                            errorText: result ? text : null,
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                 width: 0.5,
@@ -158,7 +160,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: 20.0,),
+            SizedBox(
+              height: 20.0,
+            ),
             Expanded(
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -173,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                   // add your onPressed logic here
                 },
                 child: TextButton(
-                  onPressed: ()async{
+                  onPressed: () async {
 // <<<<<<< HEAD
 //                     bool res=await database.checkIfUserExists(id, password);
 //                     print(res);
@@ -205,20 +209,18 @@ class _LoginPageState extends State<LoginPage> {
                       print(email);
                       print(password);
                       setState(() {
-                        result=false;
+                        result = false;
                       });
                       final user = await _auth.signInWithEmailAndPassword(
-                          email: email, password: password);
-                      Navigator.pushNamed(context,'futureTurnsPage');
-                    }
-                    catch(e){
+                          email: "shays433@gmail.com", password: "123456");
+                      Navigator.pushNamed(context, 'futureTurnsPage');
+                    } catch (e) {
                       print(e);
                       setState(() {
-                        text="Something went wrong";
-                        result=true;
+                        text = "Something went wrong";
+                        result = true;
                       });
                     }
-
                   },
                   child: Text(
                     'כניסה',
@@ -242,5 +244,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-

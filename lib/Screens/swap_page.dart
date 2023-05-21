@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tori/Widgets/menu.dart';
-import '../database/firebase_functions_db.dart' ;
+import '../database/firebase_functions_db.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:alert/alert.dart';
-
 
 IconData calendar_today = IconData(0xe122, fontFamily: 'MaterialIcons');
 const String _svg_qcrh9k =
@@ -22,10 +21,11 @@ const String _svg_kx5wvb =
     '<svg viewBox="53.5 258.0 320.0 74.0" ><path transform="translate(53.5, 258.0)" d="M 8 0 L 312 0 C 316.4182739257812 0 320 3.581721782684326 320 8 L 320 66 C 320 70.41828155517578 316.4182739257812 74 312 74 L 8 74 C 3.581721782684326 74 0 70.41828155517578 0 66 L 0 8 C 0 3.581721782684326 3.581721782684326 0 8 0 Z" fill="#ffffff" fill-opacity="0.85" stroke="none" stroke-width="1" stroke-opacity="0.85" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 
 List<ListReceivedRequest> myItems = [];
+List<ListReceivedRequest> tempItems = [];
 List<ListReceivedRequest> othersItems = [];
-int index=0;
+int index = 0;
 int _selectedTurn = -1;
-var userToken=FirebaseAuth.instance.currentUser?.uid;
+var userToken = FirebaseAuth.instance.currentUser?.uid;
 
 class SwapPage extends StatefulWidget {
   const SwapPage({Key? key}) : super(key: key);
@@ -35,17 +35,16 @@ class SwapPage extends StatefulWidget {
 }
 
 class _SwapPageState extends State<SwapPage> {
-
   @override
   void initState() {
-
     showSpinner();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-      const Color(0xfff4f5f3), // Set the background color to black
+          const Color(0xfff4f5f3), // Set the background color to black
       body: SafeArea(
         child: Column(
           children: [
@@ -93,15 +92,19 @@ class _SwapPageState extends State<SwapPage> {
               "התור הנבחר להחלפה",
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            Expanded(flex: 2, child: myItems.isEmpty ? Container(
-                color: Color(0xfff4f5f3),
-                child: SleekCircularSlider(
-                    appearance: CircularSliderAppearance(
-                      spinnerMode: true,
-                      customColors: CustomSliderColors(trackColor: Colors.white,
-                          progressBarColor: Colors.lightBlue),
-                    )))
-                : MyWidget()),
+            Expanded(
+                flex: 2,
+                child: myItems.isEmpty
+                    ? Container(
+                        color: Color(0xfff4f5f3),
+                        child: SleekCircularSlider(
+                            appearance: CircularSliderAppearance(
+                          spinnerMode: true,
+                          customColors: CustomSliderColors(
+                              trackColor: Colors.white,
+                              progressBarColor: Colors.lightBlue),
+                        )))
+                    : MyWidget()),
             SizedBox(
               height: 30.0,
             ),
@@ -119,14 +122,23 @@ class _SwapPageState extends State<SwapPage> {
               ),
             ),
             TextButton(
-              onPressed: ()  async{
-                await db().swapTurns(userToken, othersItems[_selectedTurn].id, myItems[index].profession, myItems[index].location, othersItems[_selectedTurn].location, myItems[index].name, othersItems[_selectedTurn].name).whenComplete(() => Alert(message: 'הבקשה נשלחה בהצלחה').show());
+              onPressed: () async {
+                await db()
+                    .swapTurns(
+                        userToken,
+                        othersItems[_selectedTurn].id,
+                        myItems[index].profession,
+                        myItems[index].location,
+                        othersItems[_selectedTurn].location,
+                        myItems[index].name,
+                        othersItems[_selectedTurn].name)
+                    .whenComplete(
+                        () => Alert(message: 'הבקשה נשלחה בהצלחה').show());
               },
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
-                  backgroundColor: MaterialStateProperty.all(Colors.blue)
-              ),
+                  backgroundColor: MaterialStateProperty.all(Colors.blue)),
               child: Text(
                 'בקש החלפה',
                 style: TextStyle(
@@ -159,43 +171,45 @@ class _SwapPageState extends State<SwapPage> {
 
   Future buildLists() async {
     setState(() {
-      othersItems=[];
+      othersItems = [];
+      tempItems = [];
     });
-    if(myItems.isEmpty) {
-      var turns = await db().getAppointments();
+    if (tempItems.isEmpty) {
+      var turns = await db().getSomething();
       setState(() {
         for (var docSnapshot in turns) {
-          myItems.add(ListReceivedRequest(
+          tempItems.add(ListReceivedRequest(
               docSnapshot.data()["DoctorName"],
               docSnapshot.data()["Profession"],
-              docSnapshot.data()["City"],docSnapshot.data()["Id"] ,false));
+              docSnapshot.data()["City"],
+              docSnapshot.data()["Id"],
+              docSnapshot.data()["Date"]));
         }
+        myItems = tempItems;
       });
     }
-    var others=await db().getOthersAppointments(myItems[index].profession);
+    var others = await db().getOthersAppointments(myItems[index].profession);
     setState(() {
       for (var docSnapshot in others) {
         othersItems.add(ListReceivedRequest(
-            docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
-            docSnapshot.data()["City"],docSnapshot.data()["Id"],false));
+            docSnapshot.data()["DoctorName"],
+            docSnapshot.data()["Profession"],
+            docSnapshot.data()["City"],
+            docSnapshot.data()["Id"],
+            docSnapshot.data()["Date"]));
       }
     });
   }
-  void showSpinner() async{
+
+  void showSpinner() async {
     await buildLists();
   }
 }
-
-
 
 const String _svg_wfqzrk =
     '<svg viewBox="357.0 287.6 13.0 14.9" ><path transform="matrix(0.0, 1.0, -1.0, 0.0, 370.0, 287.57)" d="M 7.430877685546875 0 L 14.86175537109375 13.00403594970703 L 0 13.00403594970703 L 7.430877685546875 0 Z" fill="#6e6f6f" stroke="#707070" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
 const String _svg_ju4z8i =
     '<svg viewBox="57.0 287.9 13.0 14.9" ><path transform="matrix(0.0, -1.0, 1.0, 0.0, 57.0, 302.75)" d="M 7.430877685546875 0 L 14.86175537109375 13.00403594970703 L 0 13.00403594970703 L 7.430877685546875 0 Z" fill="#6e6f6f" stroke="#707070" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';
-
-
-
-
 
 class Doctor extends StatelessWidget {
   final String name;
@@ -227,19 +241,15 @@ class _MyWidgetState extends State<MyWidget> {
   List<ListReceivedRequest> _selectedWidgetList = [];
   int _selectedIndex = 0;
 
-
   List<bool> _selections = [];
 
   void _incrementIndex() {
-
     setState(() {
       index = (index + 1) % myItems.length;
       _selectedTurn = -1;
       showSpinner();
     });
   }
-
-
 
   void _decrementIndex() {
     setState(() {
@@ -255,8 +265,6 @@ class _MyWidgetState extends State<MyWidget> {
     _selectedWidgetList = myItems; // initialize selected list with default
     _selections = List.filled(_selectedWidgetList.length, false);
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -280,21 +288,23 @@ class _MyWidgetState extends State<MyWidget> {
           ),
           Padding(
             padding: const EdgeInsets.only(right: 10),
-            child: Doctor(
-                myItems[index].name,
-                myItems[index].profession,
+            child: Doctor(myItems[index].name, myItems[index].profession,
                 myItems[index].location),
           ),
           Spacer(),
-          TextButton(
-              onPressed: () {},
-              child: Icon(calendar_today, size: 24, color: Colors.black)),
+          Column(children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(myItems[_selectedIndex].date),
+            ),
+            Icon(calendar_today, size: 24, color: Colors.black),
+          ]),
           IconButton(
             icon: SvgPicture.string(
-                           _svg_ju4z8i,
-                           allowDrawingOutsideViewBox: true,
-                           fit: BoxFit.fill,
-                        ),
+              _svg_ju4z8i,
+              allowDrawingOutsideViewBox: true,
+              fit: BoxFit.fill,
+            ),
             onPressed: _incrementIndex,
           ),
         ],
@@ -320,32 +330,41 @@ class _MyWidgetState extends State<MyWidget> {
       ),
     ]);
   }
+
   Future buildLists() async {
     setState(() {
-      othersItems=[];
+      othersItems = [];
+      tempItems = [];
     });
-    if(myItems.isEmpty) {
-      var turns = await db().getAppointments();
+    if (tempItems.isEmpty) {
+      var turns = await db().getSomething();
       setState(() {
         for (var docSnapshot in turns) {
-          myItems.add(ListReceivedRequest(
+          tempItems.add(ListReceivedRequest(
               docSnapshot.data()["DoctorName"],
               docSnapshot.data()["Profession"],
-              docSnapshot.data()["City"],docSnapshot.data()["Id"],false));
+              docSnapshot.data()["City"],
+              docSnapshot.data()["Id"],
+              docSnapshot.data()["Date"]));
         }
+        myItems = tempItems;
       });
     }
     print(index);
-    var others=await db().getOthersAppointments(myItems[index].profession);
+    var others = await db().getOthersAppointments(myItems[index].profession);
     setState(() {
       for (var docSnapshot in others) {
         othersItems.add(ListReceivedRequest(
-            docSnapshot.data()["DoctorName"], docSnapshot.data()["Profession"],
-            docSnapshot.data()["City"],docSnapshot.data()["Id"],false));
+            docSnapshot.data()["DoctorName"],
+            docSnapshot.data()["Profession"],
+            docSnapshot.data()["City"],
+            docSnapshot.data()["Id"],
+            docSnapshot.data()["Date"]));
       }
     });
   }
-  void showSpinner() async{
+
+  void showSpinner() async {
     await buildLists();
   }
 }
@@ -355,10 +374,10 @@ class ListReceivedRequest extends StatelessWidget {
   final String id;
   final String profession;
   final String location;
-  final bool isSelected;
+  final String date;
 
   const ListReceivedRequest(
-      this.name, this.profession, this.location,this.id, this.isSelected);
+      this.name, this.profession, this.location, this.id, this.date);
 
   @override
   Widget build(BuildContext context) {
@@ -367,9 +386,13 @@ class ListReceivedRequest extends StatelessWidget {
         leading: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextButton(
-                onPressed: () {},
-                child: Icon(calendar_today, size: 24, color: Colors.black)),
+            Column(children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(date),
+              ),
+              Icon(calendar_today, size: 24, color: Colors.black),
+            ])
           ],
         ),
         trailing: SvgPicture.string(
