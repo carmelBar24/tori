@@ -132,6 +132,20 @@ class db {
     print("Successfully completed");
   }
 
+  Future deleteRequest(docName, docCity, docProf, docDate) async {
+    final docRef = await firestore
+        .collection("Sent Requests")
+        .where("ReceiverDoctorName", isEqualTo: docName)
+        .where("ReceiverCity", isEqualTo: docCity)
+        .where("Profession", isEqualTo: docProf)
+        .where("ReceiverDate", isEqualTo: docDate)
+        .get();
+
+    await firestore.collection("Sent Requests").doc(docRef.docs[0].id).delete();
+
+    print("Successfully completed");
+  }
+
   Future updatePublishTurn(id) async {
     await firestore
         .collection("Future Queues")

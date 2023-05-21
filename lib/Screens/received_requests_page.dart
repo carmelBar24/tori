@@ -484,7 +484,14 @@ class ListReceivedRequest extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(left: 10),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await db().deleteRequest(
+                      myItems[index].name,
+                      myItems[index].location,
+                      myItems[index].profession,
+                      myItems[index].date);
+                  myItems.removeAt(index);
+                },
                 child: Text("סירוב", style: TextStyle(color: Colors.white)),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
