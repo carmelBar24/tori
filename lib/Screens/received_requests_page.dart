@@ -176,18 +176,18 @@ class DoctorList extends StatefulWidget {
 }
 
 class _DoctorListState extends State<DoctorList> {
-  int _selectedIndex = 0;
-
   void _incrementIndex() {
     setState(() {
-      _selectedIndex = (_selectedIndex + 1) % myItems.length;
+      if ((index + 1) % myItems.length != myItems.length) {
+        index++;
+      }
       showSpinner();
     });
   }
 
   void _decrementIndex() {
     setState(() {
-      _selectedIndex = (_selectedIndex - 1 + myItems.length) % myItems.length;
+      if ((index - 1 + myItems.length) % myItems.length != -1) index--;
       showSpinner();
     });
   }
@@ -260,16 +260,14 @@ class _DoctorListState extends State<DoctorList> {
         ),
         Padding(
           padding: const EdgeInsets.only(right: 10),
-          child: Doctor(
-              myItems[_selectedIndex].name,
-              myItems[_selectedIndex].profession,
-              myItems[_selectedIndex].location),
+          child: Doctor(myItems[index].name, myItems[index].profession,
+              myItems[index].location),
         ),
         Spacer(),
         Column(children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(myItems[_selectedIndex].date),
+            child: Text(myItems[index].date),
           ),
           Icon(calendar_today, size: 24, color: Colors.black),
         ]),
@@ -314,7 +312,6 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   List<ListReceivedRequest> _selectedWidgetList = [];
-  int _selectedIndex = 0;
 
   List<bool> _selections = [];
 
@@ -369,7 +366,7 @@ class _MyWidgetState extends State<MyWidget> {
           Column(children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(myItems[_selectedIndex].date),
+              child: Text(myItems[index].date),
             ),
             Icon(calendar_today, size: 24, color: Colors.black),
           ]),
@@ -457,7 +454,16 @@ class ListReceivedRequest extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextButton(
-              onPressed: () {
+              onPressed: () async {
+                await db().updateRequest(
+                    myItems[index].name,
+                    myItems[index].location,
+                    myItems[index].profession,
+                    myItems[index].date,
+                    othersItems[listIndex].name,
+                    othersItems[listIndex].location,
+                    othersItems[listIndex].profession,
+                    othersItems[listIndex].date);
                 Alert(message: "ההחלפה בוצעה בהצלחה"
                         // message: myItems[index].name +
                         // " מחליף עם " +

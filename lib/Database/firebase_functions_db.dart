@@ -88,6 +88,50 @@ class db {
     return docRef.docs;
   }
 
+  Future updateRequest(docName, docCity, docProf, docDate, receiverDocName,
+      receiverDocCity, receieverDocProf, receieverDocDate) async {
+    var senderDocs = await firestore
+        .collection("Future Queues")
+        .where("DoctorName", isEqualTo: docName)
+        .where("City", isEqualTo: docCity)
+        .where("Profession", isEqualTo: docProf)
+        .where("Date", isEqualTo: docDate)
+        .get();
+
+    var receieverDocs = await firestore
+        .collection("Future Queues")
+        .where("DoctorName", isEqualTo: receiverDocName)
+        .where("City", isEqualTo: receiverDocCity)
+        .where("Profession", isEqualTo: receieverDocProf)
+        .where("Date", isEqualTo: receieverDocDate)
+        .get();
+
+    var senderId = senderDocs.docs[0].data()["Id"];
+    var receieverId = receieverDocs.docs[0].data()["Id"];
+
+    await firestore
+        .collection("Future Queues")
+        .doc(senderDocs.docs[0].id)
+        .update({'Id': receieverId, 'IsPublished': false});
+
+    await firestore
+        .collection("Future Queues")
+        .doc(receieverDocs.docs[0].id)
+        .update({'Id': senderId, 'IsPublished': false});
+
+    final docRef = await firestore
+        .collection("Sent Requests")
+        .where("ReceiverDoctorName", isEqualTo: docName)
+        .where("ReceiverCity", isEqualTo: docCity)
+        .where("Profession", isEqualTo: docProf)
+        .where("ReceiverDate", isEqualTo: docDate)
+        .get();
+
+    await firestore.collection("Sent Requests").doc(docRef.docs[0].id).delete();
+
+    print("Successfully completed");
+  }
+
   Future updatePublishTurn(id) async {
     await firestore
         .collection("Future Queues")

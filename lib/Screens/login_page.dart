@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                         ], color: const Color(0xffffffff)),
                         child: TextField(
                           onChanged: (id_user) {
-                            email = "shays433@gmail.com";
+                            email = "arbeez@gmail.com";
                           },
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -212,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
                         result = false;
                       });
                       final user = await _auth.signInWithEmailAndPassword(
-                          email: "shays433@gmail.com", password: "123456");
+                          email: "arbeez@gmail.com", password: "123456");
                       Navigator.pushNamed(context, 'futureTurnsPage');
                     } catch (e) {
                       print(e);
