@@ -20,8 +20,8 @@
   
 ## Screens 😍
 <p align="center">
-<img src="Screens/1.png" height="400"/><img src="Screens/2.png" height="400" hspace="20"/><img src="Screens/3.png" height="400" /><br><br>
-<img src="Screens/4.png" height="400"/><img src="Screens/5.png" height="400"hspace="20"/><img src="Screens/6.png" height="400" />
+<img src="Screens/1.jpg" height="400"/><img src="Screens/2.jpg" height="400" hspace="20"/><img src="Screens/3.jpg" height="400" /><br><br>
+<img src="Screens/4.jpg" height="400"/><img src="Screens/5.jpg" height="400"hspace="20"/><img src="Screens/6.jpg" height="400" />
 </p>
 
 ## In Action 👀
